@@ -1,0 +1,50 @@
+pseudo code Lab2
+
+main()
+check potentiometer
+initialize ports
+initialize timers
+initialize interrupts
+initialize analog digital conversion
+
+infinite while loop
+	if slide switch is off
+		turn off all three LEDs
+		turn off buzzer
+		BILED set to red
+	if slide switch is on
+		for loop for 3 players 
+			read the potentiometer input
+			calculate the wait time
+			calculate the strum time
+			start timer
+			turn on buzzer for ~0.2 seconds
+			for loop for 8 turns
+				generate random number between 1-7
+				convert the decimal number into binary, store in array
+				light the corresponding LEDs based on the binary number for the wait time
+				record counter value
+				if any frets are pressed
+					wait until the strum button is pressed
+					record counter value
+					if initial and final counter value less than strum time and correct frets pressed
+						record as correct for corresponding player
+						BILED set to green
+					else if initial and final counter value greater than strum time or incorrect frets pressed
+						record as incorrect for corresponding player
+						BILED set to red
+			end loop
+			wait for slide switch to turn off
+			wait for slide switch to turn on
+		end loop
+		flash LEDs and buzzer three times
+		print player scores
+
+		
+end loop
+end main
+
+				
+					
+				
+			

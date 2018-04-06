@@ -1,0 +1,33 @@
+Pseudo-Code Lab4
+
+Main code:
+Initialize everything
+Infinite while loop
+	Wait for keypad input for desired heading
+
+Infinite while loop
+	if slideswitch 1 is on
+		after 80 ms, update the ranger reading
+		drive the motor
+	if slideswitch 1 is off
+		set the motor to neutral
+	if slideswitch 2 is on
+		after 40 ms, update the compass reading
+		calculate the error from the compass reading
+		steer the wheels
+	if slideswitch 2 is off
+		set the wheels straight
+
+Drive Motor code:
+if the range is equal to 30 cm
+	set the motors to neutral
+if the range is less than 30 cm
+	set the motors to reverse to maintain a 30 cm range
+if the range is greater than 30 cm
+	set the motors to a constant forward speed
+
+Steering Servo code:
+if the error is greater than 180
+	turn the wheels in the opposite direction
+if the error is less than 180 
+	

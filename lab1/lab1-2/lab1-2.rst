@@ -1,0 +1,1984 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.6.0 #9615 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module lab1_2
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _rand
+                                     13 	.globl _putchar
+                                     14 	.globl _printf
+                                     15 	.globl _getchar_nw
+                                     16 	.globl _Sys_Init
+                                     17 	.globl _UART0_Init
+                                     18 	.globl _SYSCLK_Init
+                                     19 	.globl _SS
+                                     20 	.globl _Buzzer
+                                     21 	.globl _LED1
+                                     22 	.globl _LED0
+                                     23 	.globl _PB1
+                                     24 	.globl _PB0
+                                     25 	.globl _BILED1
+                                     26 	.globl _BILED0
+                                     27 	.globl _SPIF
+                                     28 	.globl _WCOL
+                                     29 	.globl _MODF
+                                     30 	.globl _RXOVRN
+                                     31 	.globl _TXBSY
+                                     32 	.globl _SLVSEL
+                                     33 	.globl _MSTEN
+                                     34 	.globl _SPIEN
+                                     35 	.globl _AD0EN
+                                     36 	.globl _ADCEN
+                                     37 	.globl _AD0TM
+                                     38 	.globl _ADCTM
+                                     39 	.globl _AD0INT
+                                     40 	.globl _ADCINT
+                                     41 	.globl _AD0BUSY
+                                     42 	.globl _ADBUSY
+                                     43 	.globl _AD0CM1
+                                     44 	.globl _ADSTM1
+                                     45 	.globl _AD0CM0
+                                     46 	.globl _ADSTM0
+                                     47 	.globl _AD0WINT
+                                     48 	.globl _ADWINT
+                                     49 	.globl _AD0LJST
+                                     50 	.globl _ADLJST
+                                     51 	.globl _CF
+                                     52 	.globl _CR
+                                     53 	.globl _CCF4
+                                     54 	.globl _CCF3
+                                     55 	.globl _CCF2
+                                     56 	.globl _CCF1
+                                     57 	.globl _CCF0
+                                     58 	.globl _CY
+                                     59 	.globl _AC
+                                     60 	.globl _F0
+                                     61 	.globl _RS1
+                                     62 	.globl _RS0
+                                     63 	.globl _OV
+                                     64 	.globl _F1
+                                     65 	.globl _P
+                                     66 	.globl _TF2
+                                     67 	.globl _EXF2
+                                     68 	.globl _RCLK
+                                     69 	.globl _TCLK
+                                     70 	.globl _EXEN2
+                                     71 	.globl _TR2
+                                     72 	.globl _CT2
+                                     73 	.globl _CPRL2
+                                     74 	.globl _BUSY
+                                     75 	.globl _ENSMB
+                                     76 	.globl _STA
+                                     77 	.globl _STO
+                                     78 	.globl _SI
+                                     79 	.globl _AA
+                                     80 	.globl _SMBFTE
+                                     81 	.globl _SMBTOE
+                                     82 	.globl _PT2
+                                     83 	.globl _PS
+                                     84 	.globl _PS0
+                                     85 	.globl _PT1
+                                     86 	.globl _PX1
+                                     87 	.globl _PT0
+                                     88 	.globl _PX0
+                                     89 	.globl _P3_7
+                                     90 	.globl _P3_6
+                                     91 	.globl _P3_5
+                                     92 	.globl _P3_4
+                                     93 	.globl _P3_3
+                                     94 	.globl _P3_2
+                                     95 	.globl _P3_1
+                                     96 	.globl _P3_0
+                                     97 	.globl _EA
+                                     98 	.globl _ET2
+                                     99 	.globl _ES
+                                    100 	.globl _ES0
+                                    101 	.globl _ET1
+                                    102 	.globl _EX1
+                                    103 	.globl _ET0
+                                    104 	.globl _EX0
+                                    105 	.globl _P2_7
+                                    106 	.globl _P2_6
+                                    107 	.globl _P2_5
+                                    108 	.globl _P2_4
+                                    109 	.globl _P2_3
+                                    110 	.globl _P2_2
+                                    111 	.globl _P2_1
+                                    112 	.globl _P2_0
+                                    113 	.globl _S0MODE
+                                    114 	.globl _SM00
+                                    115 	.globl _SM0
+                                    116 	.globl _SM10
+                                    117 	.globl _SM1
+                                    118 	.globl _MCE0
+                                    119 	.globl _SM20
+                                    120 	.globl _SM2
+                                    121 	.globl _REN0
+                                    122 	.globl _REN
+                                    123 	.globl _TB80
+                                    124 	.globl _TB8
+                                    125 	.globl _RB80
+                                    126 	.globl _RB8
+                                    127 	.globl _TI0
+                                    128 	.globl _TI
+                                    129 	.globl _RI0
+                                    130 	.globl _RI
+                                    131 	.globl _P1_7
+                                    132 	.globl _P1_6
+                                    133 	.globl _P1_5
+                                    134 	.globl _P1_4
+                                    135 	.globl _P1_3
+                                    136 	.globl _P1_2
+                                    137 	.globl _P1_1
+                                    138 	.globl _P1_0
+                                    139 	.globl _TF1
+                                    140 	.globl _TR1
+                                    141 	.globl _TF0
+                                    142 	.globl _TR0
+                                    143 	.globl _IE1
+                                    144 	.globl _IT1
+                                    145 	.globl _IE0
+                                    146 	.globl _IT0
+                                    147 	.globl _P0_7
+                                    148 	.globl _P0_6
+                                    149 	.globl _P0_5
+                                    150 	.globl _P0_4
+                                    151 	.globl _P0_3
+                                    152 	.globl _P0_2
+                                    153 	.globl _P0_1
+                                    154 	.globl _P0_0
+                                    155 	.globl _PCA0CP4
+                                    156 	.globl _PCA0CP3
+                                    157 	.globl _PCA0CP2
+                                    158 	.globl _PCA0CP1
+                                    159 	.globl _PCA0CP0
+                                    160 	.globl _PCA0
+                                    161 	.globl _DAC1
+                                    162 	.globl _DAC0
+                                    163 	.globl _ADC0LT
+                                    164 	.globl _ADC0GT
+                                    165 	.globl _ADC0
+                                    166 	.globl _RCAP4
+                                    167 	.globl _TMR4
+                                    168 	.globl _TMR3RL
+                                    169 	.globl _TMR3
+                                    170 	.globl _RCAP2
+                                    171 	.globl _TMR2
+                                    172 	.globl _TMR1
+                                    173 	.globl _TMR0
+                                    174 	.globl _WDTCN
+                                    175 	.globl _PCA0CPH4
+                                    176 	.globl _PCA0CPH3
+                                    177 	.globl _PCA0CPH2
+                                    178 	.globl _PCA0CPH1
+                                    179 	.globl _PCA0CPH0
+                                    180 	.globl _PCA0H
+                                    181 	.globl _SPI0CN
+                                    182 	.globl _EIP2
+                                    183 	.globl _EIP1
+                                    184 	.globl _TH4
+                                    185 	.globl _TL4
+                                    186 	.globl _SADDR1
+                                    187 	.globl _SBUF1
+                                    188 	.globl _SCON1
+                                    189 	.globl _B
+                                    190 	.globl _RSTSRC
+                                    191 	.globl _PCA0CPL4
+                                    192 	.globl _PCA0CPL3
+                                    193 	.globl _PCA0CPL2
+                                    194 	.globl _PCA0CPL1
+                                    195 	.globl _PCA0CPL0
+                                    196 	.globl _PCA0L
+                                    197 	.globl _ADC0CN
+                                    198 	.globl _EIE2
+                                    199 	.globl _EIE1
+                                    200 	.globl _RCAP4H
+                                    201 	.globl _RCAP4L
+                                    202 	.globl _XBR2
+                                    203 	.globl _XBR1
+                                    204 	.globl _XBR0
+                                    205 	.globl _ACC
+                                    206 	.globl _PCA0CPM4
+                                    207 	.globl _PCA0CPM3
+                                    208 	.globl _PCA0CPM2
+                                    209 	.globl _PCA0CPM1
+                                    210 	.globl _PCA0CPM0
+                                    211 	.globl _PCA0MD
+                                    212 	.globl _PCA0CN
+                                    213 	.globl _DAC1CN
+                                    214 	.globl _DAC1H
+                                    215 	.globl _DAC1L
+                                    216 	.globl _DAC0CN
+                                    217 	.globl _DAC0H
+                                    218 	.globl _DAC0L
+                                    219 	.globl _REF0CN
+                                    220 	.globl _PSW
+                                    221 	.globl _SMB0CR
+                                    222 	.globl _TH2
+                                    223 	.globl _TL2
+                                    224 	.globl _RCAP2H
+                                    225 	.globl _RCAP2L
+                                    226 	.globl _T4CON
+                                    227 	.globl _T2CON
+                                    228 	.globl _ADC0LTH
+                                    229 	.globl _ADC0LTL
+                                    230 	.globl _ADC0GTH
+                                    231 	.globl _ADC0GTL
+                                    232 	.globl _SMB0ADR
+                                    233 	.globl _SMB0DAT
+                                    234 	.globl _SMB0STA
+                                    235 	.globl _SMB0CN
+                                    236 	.globl _ADC0H
+                                    237 	.globl _ADC0L
+                                    238 	.globl _P1MDIN
+                                    239 	.globl _ADC0CF
+                                    240 	.globl _AMX0SL
+                                    241 	.globl _AMX0CF
+                                    242 	.globl _SADEN0
+                                    243 	.globl _IP
+                                    244 	.globl _FLACL
+                                    245 	.globl _FLSCL
+                                    246 	.globl _P74OUT
+                                    247 	.globl _OSCICN
+                                    248 	.globl _OSCXCN
+                                    249 	.globl _P3
+                                    250 	.globl __XPAGE
+                                    251 	.globl _EMI0CN
+                                    252 	.globl _SADEN1
+                                    253 	.globl _P3IF
+                                    254 	.globl _AMX1SL
+                                    255 	.globl _ADC1CF
+                                    256 	.globl _ADC1CN
+                                    257 	.globl _SADDR0
+                                    258 	.globl _IE
+                                    259 	.globl _P3MDOUT
+                                    260 	.globl _PRT3CF
+                                    261 	.globl _P2MDOUT
+                                    262 	.globl _PRT2CF
+                                    263 	.globl _P1MDOUT
+                                    264 	.globl _PRT1CF
+                                    265 	.globl _P0MDOUT
+                                    266 	.globl _PRT0CF
+                                    267 	.globl _EMI0CF
+                                    268 	.globl _EMI0TC
+                                    269 	.globl _P2
+                                    270 	.globl _CPT1CN
+                                    271 	.globl _CPT0CN
+                                    272 	.globl _SPI0CKR
+                                    273 	.globl _ADC1
+                                    274 	.globl _SPI0DAT
+                                    275 	.globl _SPI0CFG
+                                    276 	.globl _SBUF0
+                                    277 	.globl _SBUF
+                                    278 	.globl _SCON0
+                                    279 	.globl _SCON
+                                    280 	.globl _P7
+                                    281 	.globl _TMR3H
+                                    282 	.globl _TMR3L
+                                    283 	.globl _TMR3RLH
+                                    284 	.globl _TMR3RLL
+                                    285 	.globl _TMR3CN
+                                    286 	.globl _P1
+                                    287 	.globl _PSCTL
+                                    288 	.globl _CKCON
+                                    289 	.globl _TH1
+                                    290 	.globl _TH0
+                                    291 	.globl _TL1
+                                    292 	.globl _TL0
+                                    293 	.globl _TMOD
+                                    294 	.globl _TCON
+                                    295 	.globl _PCON
+                                    296 	.globl _P6
+                                    297 	.globl _P5
+                                    298 	.globl _P4
+                                    299 	.globl _DPH
+                                    300 	.globl _DPL
+                                    301 	.globl _SP
+                                    302 	.globl _P0
+                                    303 	.globl _aligned_alloc_PARM_2
+                                    304 	.globl _prev
+                                    305 	.globl _num
+                                    306 	.globl _i
+                                    307 	.globl _pressed
+                                    308 	.globl _correct
+                                    309 	.globl _Counts
+                                    310 	.globl _Port_Init
+                                    311 	.globl _Interrupt_Init
+                                    312 	.globl _Timer_Init
+                                    313 	.globl _Timer0_ISR
+                                    314 	.globl _random
+                                    315 	.globl _Check
+                                    316 	.globl _Red
+                                    317 	.globl _Green
+                                    318 	.globl _Biled_Off
+                                    319 	.globl _LED0_On
+                                    320 	.globl _LED0_Off
+                                    321 	.globl _LED1_On
+                                    322 	.globl _LED1_Off
+                                    323 	.globl _Both_On
+                                    324 	.globl _Both_Off
+                                    325 ;--------------------------------------------------------
+                                    326 ; special function registers
+                                    327 ;--------------------------------------------------------
+                                    328 	.area RSEG    (ABS,DATA)
+      000000                        329 	.org 0x0000
+                           000080   330 G$P0$0$0 == 0x0080
+                           000080   331 _P0	=	0x0080
+                           000081   332 G$SP$0$0 == 0x0081
+                           000081   333 _SP	=	0x0081
+                           000082   334 G$DPL$0$0 == 0x0082
+                           000082   335 _DPL	=	0x0082
+                           000083   336 G$DPH$0$0 == 0x0083
+                           000083   337 _DPH	=	0x0083
+                           000084   338 G$P4$0$0 == 0x0084
+                           000084   339 _P4	=	0x0084
+                           000085   340 G$P5$0$0 == 0x0085
+                           000085   341 _P5	=	0x0085
+                           000086   342 G$P6$0$0 == 0x0086
+                           000086   343 _P6	=	0x0086
+                           000087   344 G$PCON$0$0 == 0x0087
+                           000087   345 _PCON	=	0x0087
+                           000088   346 G$TCON$0$0 == 0x0088
+                           000088   347 _TCON	=	0x0088
+                           000089   348 G$TMOD$0$0 == 0x0089
+                           000089   349 _TMOD	=	0x0089
+                           00008A   350 G$TL0$0$0 == 0x008a
+                           00008A   351 _TL0	=	0x008a
+                           00008B   352 G$TL1$0$0 == 0x008b
+                           00008B   353 _TL1	=	0x008b
+                           00008C   354 G$TH0$0$0 == 0x008c
+                           00008C   355 _TH0	=	0x008c
+                           00008D   356 G$TH1$0$0 == 0x008d
+                           00008D   357 _TH1	=	0x008d
+                           00008E   358 G$CKCON$0$0 == 0x008e
+                           00008E   359 _CKCON	=	0x008e
+                           00008F   360 G$PSCTL$0$0 == 0x008f
+                           00008F   361 _PSCTL	=	0x008f
+                           000090   362 G$P1$0$0 == 0x0090
+                           000090   363 _P1	=	0x0090
+                           000091   364 G$TMR3CN$0$0 == 0x0091
+                           000091   365 _TMR3CN	=	0x0091
+                           000092   366 G$TMR3RLL$0$0 == 0x0092
+                           000092   367 _TMR3RLL	=	0x0092
+                           000093   368 G$TMR3RLH$0$0 == 0x0093
+                           000093   369 _TMR3RLH	=	0x0093
+                           000094   370 G$TMR3L$0$0 == 0x0094
+                           000094   371 _TMR3L	=	0x0094
+                           000095   372 G$TMR3H$0$0 == 0x0095
+                           000095   373 _TMR3H	=	0x0095
+                           000096   374 G$P7$0$0 == 0x0096
+                           000096   375 _P7	=	0x0096
+                           000098   376 G$SCON$0$0 == 0x0098
+                           000098   377 _SCON	=	0x0098
+                           000098   378 G$SCON0$0$0 == 0x0098
+                           000098   379 _SCON0	=	0x0098
+                           000099   380 G$SBUF$0$0 == 0x0099
+                           000099   381 _SBUF	=	0x0099
+                           000099   382 G$SBUF0$0$0 == 0x0099
+                           000099   383 _SBUF0	=	0x0099
+                           00009A   384 G$SPI0CFG$0$0 == 0x009a
+                           00009A   385 _SPI0CFG	=	0x009a
+                           00009B   386 G$SPI0DAT$0$0 == 0x009b
+                           00009B   387 _SPI0DAT	=	0x009b
+                           00009C   388 G$ADC1$0$0 == 0x009c
+                           00009C   389 _ADC1	=	0x009c
+                           00009D   390 G$SPI0CKR$0$0 == 0x009d
+                           00009D   391 _SPI0CKR	=	0x009d
+                           00009E   392 G$CPT0CN$0$0 == 0x009e
+                           00009E   393 _CPT0CN	=	0x009e
+                           00009F   394 G$CPT1CN$0$0 == 0x009f
+                           00009F   395 _CPT1CN	=	0x009f
+                           0000A0   396 G$P2$0$0 == 0x00a0
+                           0000A0   397 _P2	=	0x00a0
+                           0000A1   398 G$EMI0TC$0$0 == 0x00a1
+                           0000A1   399 _EMI0TC	=	0x00a1
+                           0000A3   400 G$EMI0CF$0$0 == 0x00a3
+                           0000A3   401 _EMI0CF	=	0x00a3
+                           0000A4   402 G$PRT0CF$0$0 == 0x00a4
+                           0000A4   403 _PRT0CF	=	0x00a4
+                           0000A4   404 G$P0MDOUT$0$0 == 0x00a4
+                           0000A4   405 _P0MDOUT	=	0x00a4
+                           0000A5   406 G$PRT1CF$0$0 == 0x00a5
+                           0000A5   407 _PRT1CF	=	0x00a5
+                           0000A5   408 G$P1MDOUT$0$0 == 0x00a5
+                           0000A5   409 _P1MDOUT	=	0x00a5
+                           0000A6   410 G$PRT2CF$0$0 == 0x00a6
+                           0000A6   411 _PRT2CF	=	0x00a6
+                           0000A6   412 G$P2MDOUT$0$0 == 0x00a6
+                           0000A6   413 _P2MDOUT	=	0x00a6
+                           0000A7   414 G$PRT3CF$0$0 == 0x00a7
+                           0000A7   415 _PRT3CF	=	0x00a7
+                           0000A7   416 G$P3MDOUT$0$0 == 0x00a7
+                           0000A7   417 _P3MDOUT	=	0x00a7
+                           0000A8   418 G$IE$0$0 == 0x00a8
+                           0000A8   419 _IE	=	0x00a8
+                           0000A9   420 G$SADDR0$0$0 == 0x00a9
+                           0000A9   421 _SADDR0	=	0x00a9
+                           0000AA   422 G$ADC1CN$0$0 == 0x00aa
+                           0000AA   423 _ADC1CN	=	0x00aa
+                           0000AB   424 G$ADC1CF$0$0 == 0x00ab
+                           0000AB   425 _ADC1CF	=	0x00ab
+                           0000AC   426 G$AMX1SL$0$0 == 0x00ac
+                           0000AC   427 _AMX1SL	=	0x00ac
+                           0000AD   428 G$P3IF$0$0 == 0x00ad
+                           0000AD   429 _P3IF	=	0x00ad
+                           0000AE   430 G$SADEN1$0$0 == 0x00ae
+                           0000AE   431 _SADEN1	=	0x00ae
+                           0000AF   432 G$EMI0CN$0$0 == 0x00af
+                           0000AF   433 _EMI0CN	=	0x00af
+                           0000AF   434 G$_XPAGE$0$0 == 0x00af
+                           0000AF   435 __XPAGE	=	0x00af
+                           0000B0   436 G$P3$0$0 == 0x00b0
+                           0000B0   437 _P3	=	0x00b0
+                           0000B1   438 G$OSCXCN$0$0 == 0x00b1
+                           0000B1   439 _OSCXCN	=	0x00b1
+                           0000B2   440 G$OSCICN$0$0 == 0x00b2
+                           0000B2   441 _OSCICN	=	0x00b2
+                           0000B5   442 G$P74OUT$0$0 == 0x00b5
+                           0000B5   443 _P74OUT	=	0x00b5
+                           0000B6   444 G$FLSCL$0$0 == 0x00b6
+                           0000B6   445 _FLSCL	=	0x00b6
+                           0000B7   446 G$FLACL$0$0 == 0x00b7
+                           0000B7   447 _FLACL	=	0x00b7
+                           0000B8   448 G$IP$0$0 == 0x00b8
+                           0000B8   449 _IP	=	0x00b8
+                           0000B9   450 G$SADEN0$0$0 == 0x00b9
+                           0000B9   451 _SADEN0	=	0x00b9
+                           0000BA   452 G$AMX0CF$0$0 == 0x00ba
+                           0000BA   453 _AMX0CF	=	0x00ba
+                           0000BB   454 G$AMX0SL$0$0 == 0x00bb
+                           0000BB   455 _AMX0SL	=	0x00bb
+                           0000BC   456 G$ADC0CF$0$0 == 0x00bc
+                           0000BC   457 _ADC0CF	=	0x00bc
+                           0000BD   458 G$P1MDIN$0$0 == 0x00bd
+                           0000BD   459 _P1MDIN	=	0x00bd
+                           0000BE   460 G$ADC0L$0$0 == 0x00be
+                           0000BE   461 _ADC0L	=	0x00be
+                           0000BF   462 G$ADC0H$0$0 == 0x00bf
+                           0000BF   463 _ADC0H	=	0x00bf
+                           0000C0   464 G$SMB0CN$0$0 == 0x00c0
+                           0000C0   465 _SMB0CN	=	0x00c0
+                           0000C1   466 G$SMB0STA$0$0 == 0x00c1
+                           0000C1   467 _SMB0STA	=	0x00c1
+                           0000C2   468 G$SMB0DAT$0$0 == 0x00c2
+                           0000C2   469 _SMB0DAT	=	0x00c2
+                           0000C3   470 G$SMB0ADR$0$0 == 0x00c3
+                           0000C3   471 _SMB0ADR	=	0x00c3
+                           0000C4   472 G$ADC0GTL$0$0 == 0x00c4
+                           0000C4   473 _ADC0GTL	=	0x00c4
+                           0000C5   474 G$ADC0GTH$0$0 == 0x00c5
+                           0000C5   475 _ADC0GTH	=	0x00c5
+                           0000C6   476 G$ADC0LTL$0$0 == 0x00c6
+                           0000C6   477 _ADC0LTL	=	0x00c6
+                           0000C7   478 G$ADC0LTH$0$0 == 0x00c7
+                           0000C7   479 _ADC0LTH	=	0x00c7
+                           0000C8   480 G$T2CON$0$0 == 0x00c8
+                           0000C8   481 _T2CON	=	0x00c8
+                           0000C9   482 G$T4CON$0$0 == 0x00c9
+                           0000C9   483 _T4CON	=	0x00c9
+                           0000CA   484 G$RCAP2L$0$0 == 0x00ca
+                           0000CA   485 _RCAP2L	=	0x00ca
+                           0000CB   486 G$RCAP2H$0$0 == 0x00cb
+                           0000CB   487 _RCAP2H	=	0x00cb
+                           0000CC   488 G$TL2$0$0 == 0x00cc
+                           0000CC   489 _TL2	=	0x00cc
+                           0000CD   490 G$TH2$0$0 == 0x00cd
+                           0000CD   491 _TH2	=	0x00cd
+                           0000CF   492 G$SMB0CR$0$0 == 0x00cf
+                           0000CF   493 _SMB0CR	=	0x00cf
+                           0000D0   494 G$PSW$0$0 == 0x00d0
+                           0000D0   495 _PSW	=	0x00d0
+                           0000D1   496 G$REF0CN$0$0 == 0x00d1
+                           0000D1   497 _REF0CN	=	0x00d1
+                           0000D2   498 G$DAC0L$0$0 == 0x00d2
+                           0000D2   499 _DAC0L	=	0x00d2
+                           0000D3   500 G$DAC0H$0$0 == 0x00d3
+                           0000D3   501 _DAC0H	=	0x00d3
+                           0000D4   502 G$DAC0CN$0$0 == 0x00d4
+                           0000D4   503 _DAC0CN	=	0x00d4
+                           0000D5   504 G$DAC1L$0$0 == 0x00d5
+                           0000D5   505 _DAC1L	=	0x00d5
+                           0000D6   506 G$DAC1H$0$0 == 0x00d6
+                           0000D6   507 _DAC1H	=	0x00d6
+                           0000D7   508 G$DAC1CN$0$0 == 0x00d7
+                           0000D7   509 _DAC1CN	=	0x00d7
+                           0000D8   510 G$PCA0CN$0$0 == 0x00d8
+                           0000D8   511 _PCA0CN	=	0x00d8
+                           0000D9   512 G$PCA0MD$0$0 == 0x00d9
+                           0000D9   513 _PCA0MD	=	0x00d9
+                           0000DA   514 G$PCA0CPM0$0$0 == 0x00da
+                           0000DA   515 _PCA0CPM0	=	0x00da
+                           0000DB   516 G$PCA0CPM1$0$0 == 0x00db
+                           0000DB   517 _PCA0CPM1	=	0x00db
+                           0000DC   518 G$PCA0CPM2$0$0 == 0x00dc
+                           0000DC   519 _PCA0CPM2	=	0x00dc
+                           0000DD   520 G$PCA0CPM3$0$0 == 0x00dd
+                           0000DD   521 _PCA0CPM3	=	0x00dd
+                           0000DE   522 G$PCA0CPM4$0$0 == 0x00de
+                           0000DE   523 _PCA0CPM4	=	0x00de
+                           0000E0   524 G$ACC$0$0 == 0x00e0
+                           0000E0   525 _ACC	=	0x00e0
+                           0000E1   526 G$XBR0$0$0 == 0x00e1
+                           0000E1   527 _XBR0	=	0x00e1
+                           0000E2   528 G$XBR1$0$0 == 0x00e2
+                           0000E2   529 _XBR1	=	0x00e2
+                           0000E3   530 G$XBR2$0$0 == 0x00e3
+                           0000E3   531 _XBR2	=	0x00e3
+                           0000E4   532 G$RCAP4L$0$0 == 0x00e4
+                           0000E4   533 _RCAP4L	=	0x00e4
+                           0000E5   534 G$RCAP4H$0$0 == 0x00e5
+                           0000E5   535 _RCAP4H	=	0x00e5
+                           0000E6   536 G$EIE1$0$0 == 0x00e6
+                           0000E6   537 _EIE1	=	0x00e6
+                           0000E7   538 G$EIE2$0$0 == 0x00e7
+                           0000E7   539 _EIE2	=	0x00e7
+                           0000E8   540 G$ADC0CN$0$0 == 0x00e8
+                           0000E8   541 _ADC0CN	=	0x00e8
+                           0000E9   542 G$PCA0L$0$0 == 0x00e9
+                           0000E9   543 _PCA0L	=	0x00e9
+                           0000EA   544 G$PCA0CPL0$0$0 == 0x00ea
+                           0000EA   545 _PCA0CPL0	=	0x00ea
+                           0000EB   546 G$PCA0CPL1$0$0 == 0x00eb
+                           0000EB   547 _PCA0CPL1	=	0x00eb
+                           0000EC   548 G$PCA0CPL2$0$0 == 0x00ec
+                           0000EC   549 _PCA0CPL2	=	0x00ec
+                           0000ED   550 G$PCA0CPL3$0$0 == 0x00ed
+                           0000ED   551 _PCA0CPL3	=	0x00ed
+                           0000EE   552 G$PCA0CPL4$0$0 == 0x00ee
+                           0000EE   553 _PCA0CPL4	=	0x00ee
+                           0000EF   554 G$RSTSRC$0$0 == 0x00ef
+                           0000EF   555 _RSTSRC	=	0x00ef
+                           0000F0   556 G$B$0$0 == 0x00f0
+                           0000F0   557 _B	=	0x00f0
+                           0000F1   558 G$SCON1$0$0 == 0x00f1
+                           0000F1   559 _SCON1	=	0x00f1
+                           0000F2   560 G$SBUF1$0$0 == 0x00f2
+                           0000F2   561 _SBUF1	=	0x00f2
+                           0000F3   562 G$SADDR1$0$0 == 0x00f3
+                           0000F3   563 _SADDR1	=	0x00f3
+                           0000F4   564 G$TL4$0$0 == 0x00f4
+                           0000F4   565 _TL4	=	0x00f4
+                           0000F5   566 G$TH4$0$0 == 0x00f5
+                           0000F5   567 _TH4	=	0x00f5
+                           0000F6   568 G$EIP1$0$0 == 0x00f6
+                           0000F6   569 _EIP1	=	0x00f6
+                           0000F7   570 G$EIP2$0$0 == 0x00f7
+                           0000F7   571 _EIP2	=	0x00f7
+                           0000F8   572 G$SPI0CN$0$0 == 0x00f8
+                           0000F8   573 _SPI0CN	=	0x00f8
+                           0000F9   574 G$PCA0H$0$0 == 0x00f9
+                           0000F9   575 _PCA0H	=	0x00f9
+                           0000FA   576 G$PCA0CPH0$0$0 == 0x00fa
+                           0000FA   577 _PCA0CPH0	=	0x00fa
+                           0000FB   578 G$PCA0CPH1$0$0 == 0x00fb
+                           0000FB   579 _PCA0CPH1	=	0x00fb
+                           0000FC   580 G$PCA0CPH2$0$0 == 0x00fc
+                           0000FC   581 _PCA0CPH2	=	0x00fc
+                           0000FD   582 G$PCA0CPH3$0$0 == 0x00fd
+                           0000FD   583 _PCA0CPH3	=	0x00fd
+                           0000FE   584 G$PCA0CPH4$0$0 == 0x00fe
+                           0000FE   585 _PCA0CPH4	=	0x00fe
+                           0000FF   586 G$WDTCN$0$0 == 0x00ff
+                           0000FF   587 _WDTCN	=	0x00ff
+                           008C8A   588 G$TMR0$0$0 == 0x8c8a
+                           008C8A   589 _TMR0	=	0x8c8a
+                           008D8B   590 G$TMR1$0$0 == 0x8d8b
+                           008D8B   591 _TMR1	=	0x8d8b
+                           00CDCC   592 G$TMR2$0$0 == 0xcdcc
+                           00CDCC   593 _TMR2	=	0xcdcc
+                           00CBCA   594 G$RCAP2$0$0 == 0xcbca
+                           00CBCA   595 _RCAP2	=	0xcbca
+                           009594   596 G$TMR3$0$0 == 0x9594
+                           009594   597 _TMR3	=	0x9594
+                           009392   598 G$TMR3RL$0$0 == 0x9392
+                           009392   599 _TMR3RL	=	0x9392
+                           00F5F4   600 G$TMR4$0$0 == 0xf5f4
+                           00F5F4   601 _TMR4	=	0xf5f4
+                           00E5E4   602 G$RCAP4$0$0 == 0xe5e4
+                           00E5E4   603 _RCAP4	=	0xe5e4
+                           00BFBE   604 G$ADC0$0$0 == 0xbfbe
+                           00BFBE   605 _ADC0	=	0xbfbe
+                           00C5C4   606 G$ADC0GT$0$0 == 0xc5c4
+                           00C5C4   607 _ADC0GT	=	0xc5c4
+                           00C7C6   608 G$ADC0LT$0$0 == 0xc7c6
+                           00C7C6   609 _ADC0LT	=	0xc7c6
+                           00D3D2   610 G$DAC0$0$0 == 0xd3d2
+                           00D3D2   611 _DAC0	=	0xd3d2
+                           00D6D5   612 G$DAC1$0$0 == 0xd6d5
+                           00D6D5   613 _DAC1	=	0xd6d5
+                           00F9E9   614 G$PCA0$0$0 == 0xf9e9
+                           00F9E9   615 _PCA0	=	0xf9e9
+                           00FAEA   616 G$PCA0CP0$0$0 == 0xfaea
+                           00FAEA   617 _PCA0CP0	=	0xfaea
+                           00FBEB   618 G$PCA0CP1$0$0 == 0xfbeb
+                           00FBEB   619 _PCA0CP1	=	0xfbeb
+                           00FCEC   620 G$PCA0CP2$0$0 == 0xfcec
+                           00FCEC   621 _PCA0CP2	=	0xfcec
+                           00FDED   622 G$PCA0CP3$0$0 == 0xfded
+                           00FDED   623 _PCA0CP3	=	0xfded
+                           00FEEE   624 G$PCA0CP4$0$0 == 0xfeee
+                           00FEEE   625 _PCA0CP4	=	0xfeee
+                                    626 ;--------------------------------------------------------
+                                    627 ; special function bits
+                                    628 ;--------------------------------------------------------
+                                    629 	.area RSEG    (ABS,DATA)
+      000000                        630 	.org 0x0000
+                           000080   631 G$P0_0$0$0 == 0x0080
+                           000080   632 _P0_0	=	0x0080
+                           000081   633 G$P0_1$0$0 == 0x0081
+                           000081   634 _P0_1	=	0x0081
+                           000082   635 G$P0_2$0$0 == 0x0082
+                           000082   636 _P0_2	=	0x0082
+                           000083   637 G$P0_3$0$0 == 0x0083
+                           000083   638 _P0_3	=	0x0083
+                           000084   639 G$P0_4$0$0 == 0x0084
+                           000084   640 _P0_4	=	0x0084
+                           000085   641 G$P0_5$0$0 == 0x0085
+                           000085   642 _P0_5	=	0x0085
+                           000086   643 G$P0_6$0$0 == 0x0086
+                           000086   644 _P0_6	=	0x0086
+                           000087   645 G$P0_7$0$0 == 0x0087
+                           000087   646 _P0_7	=	0x0087
+                           000088   647 G$IT0$0$0 == 0x0088
+                           000088   648 _IT0	=	0x0088
+                           000089   649 G$IE0$0$0 == 0x0089
+                           000089   650 _IE0	=	0x0089
+                           00008A   651 G$IT1$0$0 == 0x008a
+                           00008A   652 _IT1	=	0x008a
+                           00008B   653 G$IE1$0$0 == 0x008b
+                           00008B   654 _IE1	=	0x008b
+                           00008C   655 G$TR0$0$0 == 0x008c
+                           00008C   656 _TR0	=	0x008c
+                           00008D   657 G$TF0$0$0 == 0x008d
+                           00008D   658 _TF0	=	0x008d
+                           00008E   659 G$TR1$0$0 == 0x008e
+                           00008E   660 _TR1	=	0x008e
+                           00008F   661 G$TF1$0$0 == 0x008f
+                           00008F   662 _TF1	=	0x008f
+                           000090   663 G$P1_0$0$0 == 0x0090
+                           000090   664 _P1_0	=	0x0090
+                           000091   665 G$P1_1$0$0 == 0x0091
+                           000091   666 _P1_1	=	0x0091
+                           000092   667 G$P1_2$0$0 == 0x0092
+                           000092   668 _P1_2	=	0x0092
+                           000093   669 G$P1_3$0$0 == 0x0093
+                           000093   670 _P1_3	=	0x0093
+                           000094   671 G$P1_4$0$0 == 0x0094
+                           000094   672 _P1_4	=	0x0094
+                           000095   673 G$P1_5$0$0 == 0x0095
+                           000095   674 _P1_5	=	0x0095
+                           000096   675 G$P1_6$0$0 == 0x0096
+                           000096   676 _P1_6	=	0x0096
+                           000097   677 G$P1_7$0$0 == 0x0097
+                           000097   678 _P1_7	=	0x0097
+                           000098   679 G$RI$0$0 == 0x0098
+                           000098   680 _RI	=	0x0098
+                           000098   681 G$RI0$0$0 == 0x0098
+                           000098   682 _RI0	=	0x0098
+                           000099   683 G$TI$0$0 == 0x0099
+                           000099   684 _TI	=	0x0099
+                           000099   685 G$TI0$0$0 == 0x0099
+                           000099   686 _TI0	=	0x0099
+                           00009A   687 G$RB8$0$0 == 0x009a
+                           00009A   688 _RB8	=	0x009a
+                           00009A   689 G$RB80$0$0 == 0x009a
+                           00009A   690 _RB80	=	0x009a
+                           00009B   691 G$TB8$0$0 == 0x009b
+                           00009B   692 _TB8	=	0x009b
+                           00009B   693 G$TB80$0$0 == 0x009b
+                           00009B   694 _TB80	=	0x009b
+                           00009C   695 G$REN$0$0 == 0x009c
+                           00009C   696 _REN	=	0x009c
+                           00009C   697 G$REN0$0$0 == 0x009c
+                           00009C   698 _REN0	=	0x009c
+                           00009D   699 G$SM2$0$0 == 0x009d
+                           00009D   700 _SM2	=	0x009d
+                           00009D   701 G$SM20$0$0 == 0x009d
+                           00009D   702 _SM20	=	0x009d
+                           00009D   703 G$MCE0$0$0 == 0x009d
+                           00009D   704 _MCE0	=	0x009d
+                           00009E   705 G$SM1$0$0 == 0x009e
+                           00009E   706 _SM1	=	0x009e
+                           00009E   707 G$SM10$0$0 == 0x009e
+                           00009E   708 _SM10	=	0x009e
+                           00009F   709 G$SM0$0$0 == 0x009f
+                           00009F   710 _SM0	=	0x009f
+                           00009F   711 G$SM00$0$0 == 0x009f
+                           00009F   712 _SM00	=	0x009f
+                           00009F   713 G$S0MODE$0$0 == 0x009f
+                           00009F   714 _S0MODE	=	0x009f
+                           0000A0   715 G$P2_0$0$0 == 0x00a0
+                           0000A0   716 _P2_0	=	0x00a0
+                           0000A1   717 G$P2_1$0$0 == 0x00a1
+                           0000A1   718 _P2_1	=	0x00a1
+                           0000A2   719 G$P2_2$0$0 == 0x00a2
+                           0000A2   720 _P2_2	=	0x00a2
+                           0000A3   721 G$P2_3$0$0 == 0x00a3
+                           0000A3   722 _P2_3	=	0x00a3
+                           0000A4   723 G$P2_4$0$0 == 0x00a4
+                           0000A4   724 _P2_4	=	0x00a4
+                           0000A5   725 G$P2_5$0$0 == 0x00a5
+                           0000A5   726 _P2_5	=	0x00a5
+                           0000A6   727 G$P2_6$0$0 == 0x00a6
+                           0000A6   728 _P2_6	=	0x00a6
+                           0000A7   729 G$P2_7$0$0 == 0x00a7
+                           0000A7   730 _P2_7	=	0x00a7
+                           0000A8   731 G$EX0$0$0 == 0x00a8
+                           0000A8   732 _EX0	=	0x00a8
+                           0000A9   733 G$ET0$0$0 == 0x00a9
+                           0000A9   734 _ET0	=	0x00a9
+                           0000AA   735 G$EX1$0$0 == 0x00aa
+                           0000AA   736 _EX1	=	0x00aa
+                           0000AB   737 G$ET1$0$0 == 0x00ab
+                           0000AB   738 _ET1	=	0x00ab
+                           0000AC   739 G$ES0$0$0 == 0x00ac
+                           0000AC   740 _ES0	=	0x00ac
+                           0000AC   741 G$ES$0$0 == 0x00ac
+                           0000AC   742 _ES	=	0x00ac
+                           0000AD   743 G$ET2$0$0 == 0x00ad
+                           0000AD   744 _ET2	=	0x00ad
+                           0000AF   745 G$EA$0$0 == 0x00af
+                           0000AF   746 _EA	=	0x00af
+                           0000B0   747 G$P3_0$0$0 == 0x00b0
+                           0000B0   748 _P3_0	=	0x00b0
+                           0000B1   749 G$P3_1$0$0 == 0x00b1
+                           0000B1   750 _P3_1	=	0x00b1
+                           0000B2   751 G$P3_2$0$0 == 0x00b2
+                           0000B2   752 _P3_2	=	0x00b2
+                           0000B3   753 G$P3_3$0$0 == 0x00b3
+                           0000B3   754 _P3_3	=	0x00b3
+                           0000B4   755 G$P3_4$0$0 == 0x00b4
+                           0000B4   756 _P3_4	=	0x00b4
+                           0000B5   757 G$P3_5$0$0 == 0x00b5
+                           0000B5   758 _P3_5	=	0x00b5
+                           0000B6   759 G$P3_6$0$0 == 0x00b6
+                           0000B6   760 _P3_6	=	0x00b6
+                           0000B7   761 G$P3_7$0$0 == 0x00b7
+                           0000B7   762 _P3_7	=	0x00b7
+                           0000B8   763 G$PX0$0$0 == 0x00b8
+                           0000B8   764 _PX0	=	0x00b8
+                           0000B9   765 G$PT0$0$0 == 0x00b9
+                           0000B9   766 _PT0	=	0x00b9
+                           0000BA   767 G$PX1$0$0 == 0x00ba
+                           0000BA   768 _PX1	=	0x00ba
+                           0000BB   769 G$PT1$0$0 == 0x00bb
+                           0000BB   770 _PT1	=	0x00bb
+                           0000BC   771 G$PS0$0$0 == 0x00bc
+                           0000BC   772 _PS0	=	0x00bc
+                           0000BC   773 G$PS$0$0 == 0x00bc
+                           0000BC   774 _PS	=	0x00bc
+                           0000BD   775 G$PT2$0$0 == 0x00bd
+                           0000BD   776 _PT2	=	0x00bd
+                           0000C0   777 G$SMBTOE$0$0 == 0x00c0
+                           0000C0   778 _SMBTOE	=	0x00c0
+                           0000C1   779 G$SMBFTE$0$0 == 0x00c1
+                           0000C1   780 _SMBFTE	=	0x00c1
+                           0000C2   781 G$AA$0$0 == 0x00c2
+                           0000C2   782 _AA	=	0x00c2
+                           0000C3   783 G$SI$0$0 == 0x00c3
+                           0000C3   784 _SI	=	0x00c3
+                           0000C4   785 G$STO$0$0 == 0x00c4
+                           0000C4   786 _STO	=	0x00c4
+                           0000C5   787 G$STA$0$0 == 0x00c5
+                           0000C5   788 _STA	=	0x00c5
+                           0000C6   789 G$ENSMB$0$0 == 0x00c6
+                           0000C6   790 _ENSMB	=	0x00c6
+                           0000C7   791 G$BUSY$0$0 == 0x00c7
+                           0000C7   792 _BUSY	=	0x00c7
+                           0000C8   793 G$CPRL2$0$0 == 0x00c8
+                           0000C8   794 _CPRL2	=	0x00c8
+                           0000C9   795 G$CT2$0$0 == 0x00c9
+                           0000C9   796 _CT2	=	0x00c9
+                           0000CA   797 G$TR2$0$0 == 0x00ca
+                           0000CA   798 _TR2	=	0x00ca
+                           0000CB   799 G$EXEN2$0$0 == 0x00cb
+                           0000CB   800 _EXEN2	=	0x00cb
+                           0000CC   801 G$TCLK$0$0 == 0x00cc
+                           0000CC   802 _TCLK	=	0x00cc
+                           0000CD   803 G$RCLK$0$0 == 0x00cd
+                           0000CD   804 _RCLK	=	0x00cd
+                           0000CE   805 G$EXF2$0$0 == 0x00ce
+                           0000CE   806 _EXF2	=	0x00ce
+                           0000CF   807 G$TF2$0$0 == 0x00cf
+                           0000CF   808 _TF2	=	0x00cf
+                           0000D0   809 G$P$0$0 == 0x00d0
+                           0000D0   810 _P	=	0x00d0
+                           0000D1   811 G$F1$0$0 == 0x00d1
+                           0000D1   812 _F1	=	0x00d1
+                           0000D2   813 G$OV$0$0 == 0x00d2
+                           0000D2   814 _OV	=	0x00d2
+                           0000D3   815 G$RS0$0$0 == 0x00d3
+                           0000D3   816 _RS0	=	0x00d3
+                           0000D4   817 G$RS1$0$0 == 0x00d4
+                           0000D4   818 _RS1	=	0x00d4
+                           0000D5   819 G$F0$0$0 == 0x00d5
+                           0000D5   820 _F0	=	0x00d5
+                           0000D6   821 G$AC$0$0 == 0x00d6
+                           0000D6   822 _AC	=	0x00d6
+                           0000D7   823 G$CY$0$0 == 0x00d7
+                           0000D7   824 _CY	=	0x00d7
+                           0000D8   825 G$CCF0$0$0 == 0x00d8
+                           0000D8   826 _CCF0	=	0x00d8
+                           0000D9   827 G$CCF1$0$0 == 0x00d9
+                           0000D9   828 _CCF1	=	0x00d9
+                           0000DA   829 G$CCF2$0$0 == 0x00da
+                           0000DA   830 _CCF2	=	0x00da
+                           0000DB   831 G$CCF3$0$0 == 0x00db
+                           0000DB   832 _CCF3	=	0x00db
+                           0000DC   833 G$CCF4$0$0 == 0x00dc
+                           0000DC   834 _CCF4	=	0x00dc
+                           0000DE   835 G$CR$0$0 == 0x00de
+                           0000DE   836 _CR	=	0x00de
+                           0000DF   837 G$CF$0$0 == 0x00df
+                           0000DF   838 _CF	=	0x00df
+                           0000E8   839 G$ADLJST$0$0 == 0x00e8
+                           0000E8   840 _ADLJST	=	0x00e8
+                           0000E8   841 G$AD0LJST$0$0 == 0x00e8
+                           0000E8   842 _AD0LJST	=	0x00e8
+                           0000E9   843 G$ADWINT$0$0 == 0x00e9
+                           0000E9   844 _ADWINT	=	0x00e9
+                           0000E9   845 G$AD0WINT$0$0 == 0x00e9
+                           0000E9   846 _AD0WINT	=	0x00e9
+                           0000EA   847 G$ADSTM0$0$0 == 0x00ea
+                           0000EA   848 _ADSTM0	=	0x00ea
+                           0000EA   849 G$AD0CM0$0$0 == 0x00ea
+                           0000EA   850 _AD0CM0	=	0x00ea
+                           0000EB   851 G$ADSTM1$0$0 == 0x00eb
+                           0000EB   852 _ADSTM1	=	0x00eb
+                           0000EB   853 G$AD0CM1$0$0 == 0x00eb
+                           0000EB   854 _AD0CM1	=	0x00eb
+                           0000EC   855 G$ADBUSY$0$0 == 0x00ec
+                           0000EC   856 _ADBUSY	=	0x00ec
+                           0000EC   857 G$AD0BUSY$0$0 == 0x00ec
+                           0000EC   858 _AD0BUSY	=	0x00ec
+                           0000ED   859 G$ADCINT$0$0 == 0x00ed
+                           0000ED   860 _ADCINT	=	0x00ed
+                           0000ED   861 G$AD0INT$0$0 == 0x00ed
+                           0000ED   862 _AD0INT	=	0x00ed
+                           0000EE   863 G$ADCTM$0$0 == 0x00ee
+                           0000EE   864 _ADCTM	=	0x00ee
+                           0000EE   865 G$AD0TM$0$0 == 0x00ee
+                           0000EE   866 _AD0TM	=	0x00ee
+                           0000EF   867 G$ADCEN$0$0 == 0x00ef
+                           0000EF   868 _ADCEN	=	0x00ef
+                           0000EF   869 G$AD0EN$0$0 == 0x00ef
+                           0000EF   870 _AD0EN	=	0x00ef
+                           0000F8   871 G$SPIEN$0$0 == 0x00f8
+                           0000F8   872 _SPIEN	=	0x00f8
+                           0000F9   873 G$MSTEN$0$0 == 0x00f9
+                           0000F9   874 _MSTEN	=	0x00f9
+                           0000FA   875 G$SLVSEL$0$0 == 0x00fa
+                           0000FA   876 _SLVSEL	=	0x00fa
+                           0000FB   877 G$TXBSY$0$0 == 0x00fb
+                           0000FB   878 _TXBSY	=	0x00fb
+                           0000FC   879 G$RXOVRN$0$0 == 0x00fc
+                           0000FC   880 _RXOVRN	=	0x00fc
+                           0000FD   881 G$MODF$0$0 == 0x00fd
+                           0000FD   882 _MODF	=	0x00fd
+                           0000FE   883 G$WCOL$0$0 == 0x00fe
+                           0000FE   884 _WCOL	=	0x00fe
+                           0000FF   885 G$SPIF$0$0 == 0x00ff
+                           0000FF   886 _SPIF	=	0x00ff
+                           0000B3   887 G$BILED0$0$0 == 0x00b3
+                           0000B3   888 _BILED0	=	0x00b3
+                           0000B4   889 G$BILED1$0$0 == 0x00b4
+                           0000B4   890 _BILED1	=	0x00b4
+                           0000B0   891 G$PB0$0$0 == 0x00b0
+                           0000B0   892 _PB0	=	0x00b0
+                           0000B1   893 G$PB1$0$0 == 0x00b1
+                           0000B1   894 _PB1	=	0x00b1
+                           0000B5   895 G$LED0$0$0 == 0x00b5
+                           0000B5   896 _LED0	=	0x00b5
+                           0000B6   897 G$LED1$0$0 == 0x00b6
+                           0000B6   898 _LED1	=	0x00b6
+                           0000B7   899 G$Buzzer$0$0 == 0x00b7
+                           0000B7   900 _Buzzer	=	0x00b7
+                           0000A0   901 G$SS$0$0 == 0x00a0
+                           0000A0   902 _SS	=	0x00a0
+                                    903 ;--------------------------------------------------------
+                                    904 ; overlayable register banks
+                                    905 ;--------------------------------------------------------
+                                    906 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        907 	.ds 8
+                                    908 ;--------------------------------------------------------
+                                    909 ; internal ram data
+                                    910 ;--------------------------------------------------------
+                                    911 	.area DSEG    (DATA)
+                           000000   912 G$Counts$0$0==.
+      000008                        913 _Counts::
+      000008                        914 	.ds 2
+                           000002   915 G$correct$0$0==.
+      00000A                        916 _correct::
+      00000A                        917 	.ds 2
+                           000004   918 G$pressed$0$0==.
+      00000C                        919 _pressed::
+      00000C                        920 	.ds 2
+                           000006   921 G$i$0$0==.
+      00000E                        922 _i::
+      00000E                        923 	.ds 1
+                           000007   924 G$num$0$0==.
+      00000F                        925 _num::
+      00000F                        926 	.ds 1
+                           000008   927 G$prev$0$0==.
+      000010                        928 _prev::
+      000010                        929 	.ds 1
+                           000009   930 Llab1_2.aligned_alloc$size$1$39==.
+      000011                        931 _aligned_alloc_PARM_2:
+      000011                        932 	.ds 2
+                                    933 ;--------------------------------------------------------
+                                    934 ; overlayable items in internal ram 
+                                    935 ;--------------------------------------------------------
+                                    936 	.area	OSEG    (OVR,DATA)
+                                    937 	.area	OSEG    (OVR,DATA)
+                                    938 ;--------------------------------------------------------
+                                    939 ; Stack segment in internal ram 
+                                    940 ;--------------------------------------------------------
+                                    941 	.area	SSEG
+      000042                        942 __start__stack:
+      000042                        943 	.ds	1
+                                    944 
+                                    945 ;--------------------------------------------------------
+                                    946 ; indirectly addressable internal ram data
+                                    947 ;--------------------------------------------------------
+                                    948 	.area ISEG    (DATA)
+                                    949 ;--------------------------------------------------------
+                                    950 ; absolute internal ram data
+                                    951 ;--------------------------------------------------------
+                                    952 	.area IABS    (ABS,DATA)
+                                    953 	.area IABS    (ABS,DATA)
+                                    954 ;--------------------------------------------------------
+                                    955 ; bit data
+                                    956 ;--------------------------------------------------------
+                                    957 	.area BSEG    (BIT)
+                                    958 ;--------------------------------------------------------
+                                    959 ; paged external ram data
+                                    960 ;--------------------------------------------------------
+                                    961 	.area PSEG    (PAG,XDATA)
+                                    962 ;--------------------------------------------------------
+                                    963 ; external ram data
+                                    964 ;--------------------------------------------------------
+                                    965 	.area XSEG    (XDATA)
+                                    966 ;--------------------------------------------------------
+                                    967 ; absolute external ram data
+                                    968 ;--------------------------------------------------------
+                                    969 	.area XABS    (ABS,XDATA)
+                                    970 ;--------------------------------------------------------
+                                    971 ; external initialized ram data
+                                    972 ;--------------------------------------------------------
+                                    973 	.area XISEG   (XDATA)
+                                    974 	.area HOME    (CODE)
+                                    975 	.area GSINIT0 (CODE)
+                                    976 	.area GSINIT1 (CODE)
+                                    977 	.area GSINIT2 (CODE)
+                                    978 	.area GSINIT3 (CODE)
+                                    979 	.area GSINIT4 (CODE)
+                                    980 	.area GSINIT5 (CODE)
+                                    981 	.area GSINIT  (CODE)
+                                    982 	.area GSFINAL (CODE)
+                                    983 	.area CSEG    (CODE)
+                                    984 ;--------------------------------------------------------
+                                    985 ; interrupt vector 
+                                    986 ;--------------------------------------------------------
+                                    987 	.area HOME    (CODE)
+      000000                        988 __interrupt_vect:
+      000000 02 00 11         [24]  989 	ljmp	__sdcc_gsinit_startup
+      000003 32               [24]  990 	reti
+      000004                        991 	.ds	7
+      00000B 02 01 F0         [24]  992 	ljmp	_Timer0_ISR
+                                    993 ;--------------------------------------------------------
+                                    994 ; global & static initialisations
+                                    995 ;--------------------------------------------------------
+                                    996 	.area HOME    (CODE)
+                                    997 	.area GSINIT  (CODE)
+                                    998 	.area GSFINAL (CODE)
+                                    999 	.area GSINIT  (CODE)
+                                   1000 	.globl __sdcc_gsinit_startup
+                                   1001 	.globl __sdcc_program_startup
+                                   1002 	.globl __start__stack
+                                   1003 	.globl __mcs51_genXINIT
+                                   1004 	.globl __mcs51_genXRAMCLEAR
+                                   1005 	.globl __mcs51_genRAMCLEAR
+                           000000  1006 	C$lab1_2.c$50$1$113 ==.
+                                   1007 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:50: unsigned int Counts = 0;
+      00006A E4               [12] 1008 	clr	a
+      00006B F5 08            [12] 1009 	mov	_Counts,a
+      00006D F5 09            [12] 1010 	mov	(_Counts + 1),a
+                           000005  1011 	C$lab1_2.c$51$1$113 ==.
+                                   1012 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:51: unsigned int correct = 0;
+      00006F F5 0A            [12] 1013 	mov	_correct,a
+      000071 F5 0B            [12] 1014 	mov	(_correct + 1),a
+                           000009  1015 	C$lab1_2.c$52$1$113 ==.
+                                   1016 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:52: unsigned int pressed = 0;
+      000073 F5 0C            [12] 1017 	mov	_pressed,a
+      000075 F5 0D            [12] 1018 	mov	(_pressed + 1),a
+                                   1019 	.area GSFINAL (CODE)
+      000081 02 00 0E         [24] 1020 	ljmp	__sdcc_program_startup
+                                   1021 ;--------------------------------------------------------
+                                   1022 ; Home
+                                   1023 ;--------------------------------------------------------
+                                   1024 	.area HOME    (CODE)
+                                   1025 	.area HOME    (CODE)
+      00000E                       1026 __sdcc_program_startup:
+      00000E 02 00 FB         [24] 1027 	ljmp	_main
+                                   1028 ;	return from main will return to caller
+                                   1029 ;--------------------------------------------------------
+                                   1030 ; code
+                                   1031 ;--------------------------------------------------------
+                                   1032 	.area CSEG    (CODE)
+                                   1033 ;------------------------------------------------------------
+                                   1034 ;Allocation info for local variables in function 'SYSCLK_Init'
+                                   1035 ;------------------------------------------------------------
+                                   1036 ;i                         Allocated to registers r6 r7 
+                                   1037 ;------------------------------------------------------------
+                           000000  1038 	G$SYSCLK_Init$0$0 ==.
+                           000000  1039 	C$c8051_SDCC.h$42$0$0 ==.
+                                   1040 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:42: void SYSCLK_Init(void)
+                                   1041 ;	-----------------------------------------
+                                   1042 ;	 function SYSCLK_Init
+                                   1043 ;	-----------------------------------------
+      000084                       1044 _SYSCLK_Init:
+                           000007  1045 	ar7 = 0x07
+                           000006  1046 	ar6 = 0x06
+                           000005  1047 	ar5 = 0x05
+                           000004  1048 	ar4 = 0x04
+                           000003  1049 	ar3 = 0x03
+                           000002  1050 	ar2 = 0x02
+                           000001  1051 	ar1 = 0x01
+                           000000  1052 	ar0 = 0x00
+                           000000  1053 	C$c8051_SDCC.h$46$1$2 ==.
+                                   1054 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:46: OSCXCN = 0x67;                      // start external oscillator with
+      000084 75 B1 67         [24] 1055 	mov	_OSCXCN,#0x67
+                           000003  1056 	C$c8051_SDCC.h$49$1$2 ==.
+                                   1057 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:49: for (i=0; i < 256; i++);            // wait for oscillator to start
+      000087 7E 00            [12] 1058 	mov	r6,#0x00
+      000089 7F 01            [12] 1059 	mov	r7,#0x01
+      00008B                       1060 00107$:
+      00008B EE               [12] 1061 	mov	a,r6
+      00008C 24 FF            [12] 1062 	add	a,#0xff
+      00008E FC               [12] 1063 	mov	r4,a
+      00008F EF               [12] 1064 	mov	a,r7
+      000090 34 FF            [12] 1065 	addc	a,#0xff
+      000092 FD               [12] 1066 	mov	r5,a
+      000093 8C 06            [24] 1067 	mov	ar6,r4
+      000095 8D 07            [24] 1068 	mov	ar7,r5
+      000097 EC               [12] 1069 	mov	a,r4
+      000098 4D               [12] 1070 	orl	a,r5
+      000099 70 F0            [24] 1071 	jnz	00107$
+                           000017  1072 	C$c8051_SDCC.h$51$1$2 ==.
+                                   1073 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:51: while (!(OSCXCN & 0x80));           // Wait for crystal osc. to settle
+      00009B                       1074 00102$:
+      00009B E5 B1            [12] 1075 	mov	a,_OSCXCN
+      00009D 30 E7 FB         [24] 1076 	jnb	acc.7,00102$
+                           00001C  1077 	C$c8051_SDCC.h$53$1$2 ==.
+                                   1078 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:53: OSCICN = 0x88;                      // select external oscillator as SYSCLK
+      0000A0 75 B2 88         [24] 1079 	mov	_OSCICN,#0x88
+                           00001F  1080 	C$c8051_SDCC.h$56$1$2 ==.
+                           00001F  1081 	XG$SYSCLK_Init$0$0 ==.
+      0000A3 22               [24] 1082 	ret
+                                   1083 ;------------------------------------------------------------
+                                   1084 ;Allocation info for local variables in function 'UART0_Init'
+                                   1085 ;------------------------------------------------------------
+                           000020  1086 	G$UART0_Init$0$0 ==.
+                           000020  1087 	C$c8051_SDCC.h$64$1$2 ==.
+                                   1088 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:64: void UART0_Init(void)
+                                   1089 ;	-----------------------------------------
+                                   1090 ;	 function UART0_Init
+                                   1091 ;	-----------------------------------------
+      0000A4                       1092 _UART0_Init:
+                           000020  1093 	C$c8051_SDCC.h$66$1$4 ==.
+                                   1094 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:66: SCON0  = 0x50;                      // SCON0: mode 1, 8-bit UART, enable RX
+      0000A4 75 98 50         [24] 1095 	mov	_SCON0,#0x50
+                           000023  1096 	C$c8051_SDCC.h$67$1$4 ==.
+                                   1097 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:67: TMOD   = 0x20;                      // TMOD: timer 1, mode 2, 8-bit reload
+      0000A7 75 89 20         [24] 1098 	mov	_TMOD,#0x20
+                           000026  1099 	C$c8051_SDCC.h$68$1$4 ==.
+                                   1100 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:68: TH1    = 0xFF&-(SYSCLK/BAUDRATE/16);     // set Timer1 reload value for baudrate
+      0000AA 75 8D DC         [24] 1101 	mov	_TH1,#0xdc
+                           000029  1102 	C$c8051_SDCC.h$69$1$4 ==.
+                                   1103 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:69: TR1    = 1;                         // start Timer1
+      0000AD D2 8E            [12] 1104 	setb	_TR1
+                           00002B  1105 	C$c8051_SDCC.h$70$1$4 ==.
+                                   1106 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:70: CKCON |= 0x10;                      // Timer1 uses SYSCLK as time base
+      0000AF 43 8E 10         [24] 1107 	orl	_CKCON,#0x10
+                           00002E  1108 	C$c8051_SDCC.h$71$1$4 ==.
+                                   1109 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:71: PCON  |= 0x80;                      // SMOD00 = 1 (disable baud rate 
+      0000B2 43 87 80         [24] 1110 	orl	_PCON,#0x80
+                           000031  1111 	C$c8051_SDCC.h$73$1$4 ==.
+                                   1112 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:73: TI0    = 1;                         // Indicate TX0 ready
+      0000B5 D2 99            [12] 1113 	setb	_TI0
+                           000033  1114 	C$c8051_SDCC.h$74$1$4 ==.
+                                   1115 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:74: P0MDOUT |= 0x01;                    // Set TX0 to push/pull
+      0000B7 43 A4 01         [24] 1116 	orl	_P0MDOUT,#0x01
+                           000036  1117 	C$c8051_SDCC.h$75$1$4 ==.
+                           000036  1118 	XG$UART0_Init$0$0 ==.
+      0000BA 22               [24] 1119 	ret
+                                   1120 ;------------------------------------------------------------
+                                   1121 ;Allocation info for local variables in function 'Sys_Init'
+                                   1122 ;------------------------------------------------------------
+                           000037  1123 	G$Sys_Init$0$0 ==.
+                           000037  1124 	C$c8051_SDCC.h$83$1$4 ==.
+                                   1125 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:83: void Sys_Init(void)
+                                   1126 ;	-----------------------------------------
+                                   1127 ;	 function Sys_Init
+                                   1128 ;	-----------------------------------------
+      0000BB                       1129 _Sys_Init:
+                           000037  1130 	C$c8051_SDCC.h$85$1$6 ==.
+                                   1131 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:85: WDTCN = 0xde;			// disable watchdog timer
+      0000BB 75 FF DE         [24] 1132 	mov	_WDTCN,#0xde
+                           00003A  1133 	C$c8051_SDCC.h$86$1$6 ==.
+                                   1134 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:86: WDTCN = 0xad;
+      0000BE 75 FF AD         [24] 1135 	mov	_WDTCN,#0xad
+                           00003D  1136 	C$c8051_SDCC.h$88$1$6 ==.
+                                   1137 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:88: SYSCLK_Init();			// initialize oscillator
+      0000C1 12 00 84         [24] 1138 	lcall	_SYSCLK_Init
+                           000040  1139 	C$c8051_SDCC.h$89$1$6 ==.
+                                   1140 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:89: UART0_Init();			// initialize UART0
+      0000C4 12 00 A4         [24] 1141 	lcall	_UART0_Init
+                           000043  1142 	C$c8051_SDCC.h$91$1$6 ==.
+                                   1143 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:91: XBR0 |= 0x04;
+      0000C7 43 E1 04         [24] 1144 	orl	_XBR0,#0x04
+                           000046  1145 	C$c8051_SDCC.h$92$1$6 ==.
+                                   1146 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:92: XBR2 |= 0x40;                    	// Enable crossbar and weak pull-ups
+      0000CA 43 E3 40         [24] 1147 	orl	_XBR2,#0x40
+                           000049  1148 	C$c8051_SDCC.h$93$1$6 ==.
+                           000049  1149 	XG$Sys_Init$0$0 ==.
+      0000CD 22               [24] 1150 	ret
+                                   1151 ;------------------------------------------------------------
+                                   1152 ;Allocation info for local variables in function 'putchar'
+                                   1153 ;------------------------------------------------------------
+                                   1154 ;c                         Allocated to registers r7 
+                                   1155 ;------------------------------------------------------------
+                           00004A  1156 	G$putchar$0$0 ==.
+                           00004A  1157 	C$c8051_SDCC.h$98$1$6 ==.
+                                   1158 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:98: void putchar(char c)
+                                   1159 ;	-----------------------------------------
+                                   1160 ;	 function putchar
+                                   1161 ;	-----------------------------------------
+      0000CE                       1162 _putchar:
+      0000CE AF 82            [24] 1163 	mov	r7,dpl
+                           00004C  1164 	C$c8051_SDCC.h$100$1$8 ==.
+                                   1165 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:100: while (!TI0); 
+      0000D0                       1166 00101$:
+                           00004C  1167 	C$c8051_SDCC.h$101$1$8 ==.
+                                   1168 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:101: TI0 = 0;
+      0000D0 10 99 02         [24] 1169 	jbc	_TI0,00112$
+      0000D3 80 FB            [24] 1170 	sjmp	00101$
+      0000D5                       1171 00112$:
+                           000051  1172 	C$c8051_SDCC.h$102$1$8 ==.
+                                   1173 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:102: SBUF0 = c;
+      0000D5 8F 99            [24] 1174 	mov	_SBUF0,r7
+                           000053  1175 	C$c8051_SDCC.h$103$1$8 ==.
+                           000053  1176 	XG$putchar$0$0 ==.
+      0000D7 22               [24] 1177 	ret
+                                   1178 ;------------------------------------------------------------
+                                   1179 ;Allocation info for local variables in function 'getchar'
+                                   1180 ;------------------------------------------------------------
+                                   1181 ;c                         Allocated to registers 
+                                   1182 ;------------------------------------------------------------
+                           000054  1183 	G$getchar$0$0 ==.
+                           000054  1184 	C$c8051_SDCC.h$108$1$8 ==.
+                                   1185 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:108: char getchar(void)
+                                   1186 ;	-----------------------------------------
+                                   1187 ;	 function getchar
+                                   1188 ;	-----------------------------------------
+      0000D8                       1189 _getchar:
+                           000054  1190 	C$c8051_SDCC.h$111$1$10 ==.
+                                   1191 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:111: while (!RI0);
+      0000D8                       1192 00101$:
+                           000054  1193 	C$c8051_SDCC.h$112$1$10 ==.
+                                   1194 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:112: RI0 = 0;
+      0000D8 10 98 02         [24] 1195 	jbc	_RI0,00112$
+      0000DB 80 FB            [24] 1196 	sjmp	00101$
+      0000DD                       1197 00112$:
+                           000059  1198 	C$c8051_SDCC.h$113$1$10 ==.
+                                   1199 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:113: c = SBUF0;
+      0000DD 85 99 82         [24] 1200 	mov	dpl,_SBUF0
+                           00005C  1201 	C$c8051_SDCC.h$114$1$10 ==.
+                                   1202 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:114: putchar(c);                          // echo to terminal
+      0000E0 12 00 CE         [24] 1203 	lcall	_putchar
+                           00005F  1204 	C$c8051_SDCC.h$115$1$10 ==.
+                                   1205 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:115: return SBUF0;
+      0000E3 85 99 82         [24] 1206 	mov	dpl,_SBUF0
+                           000062  1207 	C$c8051_SDCC.h$116$1$10 ==.
+                           000062  1208 	XG$getchar$0$0 ==.
+      0000E6 22               [24] 1209 	ret
+                                   1210 ;------------------------------------------------------------
+                                   1211 ;Allocation info for local variables in function 'getchar_nw'
+                                   1212 ;------------------------------------------------------------
+                                   1213 ;c                         Allocated to registers 
+                                   1214 ;------------------------------------------------------------
+                           000063  1215 	G$getchar_nw$0$0 ==.
+                           000063  1216 	C$c8051_SDCC.h$121$1$10 ==.
+                                   1217 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:121: char getchar_nw(void)
+                                   1218 ;	-----------------------------------------
+                                   1219 ;	 function getchar_nw
+                                   1220 ;	-----------------------------------------
+      0000E7                       1221 _getchar_nw:
+                           000063  1222 	C$c8051_SDCC.h$124$1$12 ==.
+                                   1223 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:124: if (!RI0) return 0xFF;
+      0000E7 20 98 05         [24] 1224 	jb	_RI0,00102$
+      0000EA 75 82 FF         [24] 1225 	mov	dpl,#0xff
+      0000ED 80 0B            [24] 1226 	sjmp	00104$
+      0000EF                       1227 00102$:
+                           00006B  1228 	C$c8051_SDCC.h$127$2$13 ==.
+                                   1229 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:127: RI0 = 0;
+      0000EF C2 98            [12] 1230 	clr	_RI0
+                           00006D  1231 	C$c8051_SDCC.h$128$2$13 ==.
+                                   1232 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:128: c = SBUF0;
+      0000F1 85 99 82         [24] 1233 	mov	dpl,_SBUF0
+                           000070  1234 	C$c8051_SDCC.h$129$2$13 ==.
+                                   1235 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:129: putchar(c);                          // echo to terminal
+      0000F4 12 00 CE         [24] 1236 	lcall	_putchar
+                           000073  1237 	C$c8051_SDCC.h$130$2$13 ==.
+                                   1238 ;	C:/Program Files/SDCC/bin/../include/mcs51/c8051_SDCC.h:130: return SBUF0;
+      0000F7 85 99 82         [24] 1239 	mov	dpl,_SBUF0
+      0000FA                       1240 00104$:
+                           000076  1241 	C$c8051_SDCC.h$132$1$12 ==.
+                           000076  1242 	XG$getchar_nw$0$0 ==.
+      0000FA 22               [24] 1243 	ret
+                                   1244 ;------------------------------------------------------------
+                                   1245 ;Allocation info for local variables in function 'main'
+                                   1246 ;------------------------------------------------------------
+                           000077  1247 	G$main$0$0 ==.
+                           000077  1248 	C$lab1_2.c$56$1$12 ==.
+                                   1249 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:56: void main(void)
+                                   1250 ;	-----------------------------------------
+                                   1251 ;	 function main
+                                   1252 ;	-----------------------------------------
+      0000FB                       1253 _main:
+                           000077  1254 	C$lab1_2.c$58$1$63 ==.
+                                   1255 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:58: Sys_Init();      // System Initialization
+      0000FB 12 00 BB         [24] 1256 	lcall	_Sys_Init
+                           00007A  1257 	C$lab1_2.c$59$1$63 ==.
+                                   1258 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:59: Port_Init();     // Initialize ports 2 and 3 
+      0000FE 12 01 C9         [24] 1259 	lcall	_Port_Init
+                           00007D  1260 	C$lab1_2.c$60$1$63 ==.
+                                   1261 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:60: Interrupt_Init();
+      000101 12 01 D9         [24] 1262 	lcall	_Interrupt_Init
+                           000080  1263 	C$lab1_2.c$61$1$63 ==.
+                                   1264 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:61: Timer_Init();    // Initialize Timer 0 
+      000104 12 01 DF         [24] 1265 	lcall	_Timer_Init
+                           000083  1266 	C$lab1_2.c$63$1$63 ==.
+                                   1267 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:63: putchar(' ');    // the quote fonts may not copy correctly into SiLabs IDE
+      000107 75 82 20         [24] 1268 	mov	dpl,#0x20
+      00010A 12 00 CE         [24] 1269 	lcall	_putchar
+                           000089  1270 	C$lab1_2.c$64$1$63 ==.
+                                   1271 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:64: printf("Start\r\n");
+      00010D 74 BE            [12] 1272 	mov	a,#___str_0
+      00010F C0 E0            [24] 1273 	push	acc
+      000111 74 0A            [12] 1274 	mov	a,#(___str_0 >> 8)
+      000113 C0 E0            [24] 1275 	push	acc
+      000115 74 80            [12] 1276 	mov	a,#0x80
+      000117 C0 E0            [24] 1277 	push	acc
+      000119 12 04 6D         [24] 1278 	lcall	_printf
+      00011C 15 81            [12] 1279 	dec	sp
+      00011E 15 81            [12] 1280 	dec	sp
+      000120 15 81            [12] 1281 	dec	sp
+                           00009E  1282 	C$lab1_2.c$67$1$63 ==.
+                                   1283 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:67: while(1) {
+      000122                       1284 00117$:
+                           00009E  1285 	C$lab1_2.c$68$2$64 ==.
+                                   1286 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:68: if (SS) {
+      000122 30 A0 0F         [24] 1287 	jnb	_SS,00111$
+                           0000A1  1288 	C$lab1_2.c$69$3$65 ==.
+                                   1289 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:69: LED0_Off();
+      000125 12 03 30         [24] 1290 	lcall	_LED0_Off
+                           0000A4  1291 	C$lab1_2.c$70$3$65 ==.
+                                   1292 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:70: LED1_Off();
+      000128 12 03 36         [24] 1293 	lcall	_LED1_Off
+                           0000A7  1294 	C$lab1_2.c$71$3$65 ==.
+                                   1295 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:71: Biled_Off();
+      00012B 12 03 28         [24] 1296 	lcall	_Biled_Off
+                           0000AA  1297 	C$lab1_2.c$72$3$65 ==.
+                                   1298 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:72: Buzzer = 1;
+      00012E D2 B7            [12] 1299 	setb	_Buzzer
+                           0000AC  1300 	C$lab1_2.c$73$3$65 ==.
+                                   1301 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:73: TR0 = 0;
+      000130 C2 8C            [12] 1302 	clr	_TR0
+                           0000AE  1303 	C$lab1_2.c$74$3$65 ==.
+                                   1304 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:74: continue;
+      000132 80 EE            [24] 1305 	sjmp	00117$
+      000134                       1306 00111$:
+                           0000B0  1307 	C$lab1_2.c$75$2$64 ==.
+                                   1308 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:75: } else if(!SS) {
+      000134 20 A0 76         [24] 1309 	jb	_SS,00112$
+                           0000B3  1310 	C$lab1_2.c$76$3$66 ==.
+                                   1311 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:76: correct = 0;
+      000137 E4               [12] 1312 	clr	a
+      000138 F5 0A            [12] 1313 	mov	_correct,a
+      00013A F5 0B            [12] 1314 	mov	(_correct + 1),a
+                           0000B8  1315 	C$lab1_2.c$77$3$66 ==.
+                                   1316 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:77: printf("Game begins!\r\n");
+      00013C 74 C6            [12] 1317 	mov	a,#___str_1
+      00013E C0 E0            [24] 1318 	push	acc
+      000140 74 0A            [12] 1319 	mov	a,#(___str_1 >> 8)
+      000142 C0 E0            [24] 1320 	push	acc
+      000144 74 80            [12] 1321 	mov	a,#0x80
+      000146 C0 E0            [24] 1322 	push	acc
+      000148 12 04 6D         [24] 1323 	lcall	_printf
+      00014B 15 81            [12] 1324 	dec	sp
+      00014D 15 81            [12] 1325 	dec	sp
+      00014F 15 81            [12] 1326 	dec	sp
+                           0000CD  1327 	C$lab1_2.c$78$3$66 ==.
+                                   1328 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:78: for (i = 0; i < 10; ++i) {
+      000151 75 0E 00         [24] 1329 	mov	_i,#0x00
+                           0000D0  1330 	C$lab1_2.c$79$4$67 ==.
+                                   1331 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:79: while(SS);
+      000154                       1332 00101$:
+      000154 20 A0 FD         [24] 1333 	jb	_SS,00101$
+                           0000D3  1334 	C$lab1_2.c$80$4$67 ==.
+                                   1335 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:80: TR0 = 1;
+      000157 D2 8C            [12] 1336 	setb	_TR0
+                           0000D5  1337 	C$lab1_2.c$81$4$67 ==.
+                                   1338 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:81: Buzzer = 1;
+      000159 D2 B7            [12] 1339 	setb	_Buzzer
+                           0000D7  1340 	C$lab1_2.c$82$4$67 ==.
+                                   1341 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:82: num = random();
+      00015B 12 02 01         [24] 1342 	lcall	_random
+      00015E 85 82 0F         [24] 1343 	mov	_num,dpl
+                           0000DD  1344 	C$lab1_2.c$84$4$67 ==.
+                                   1345 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:84: while (num == prev) {
+      000161                       1346 00104$:
+      000161 E5 10            [12] 1347 	mov	a,_prev
+      000163 B5 0F 08         [24] 1348 	cjne	a,_num,00106$
+                           0000E2  1349 	C$lab1_2.c$85$5$68 ==.
+                                   1350 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:85: num = random();
+      000166 12 02 01         [24] 1351 	lcall	_random
+      000169 85 82 0F         [24] 1352 	mov	_num,dpl
+      00016C 80 F3            [24] 1353 	sjmp	00104$
+      00016E                       1354 00106$:
+                           0000EA  1355 	C$lab1_2.c$87$4$67 ==.
+                                   1356 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:87: prev = num;
+      00016E 85 0F 10         [24] 1357 	mov	_prev,_num
+                           0000ED  1358 	C$lab1_2.c$88$4$67 ==.
+                                   1359 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:88: Check(num);
+      000171 85 0F 82         [24] 1360 	mov	dpl,_num
+      000174 12 02 0E         [24] 1361 	lcall	_Check
+                           0000F3  1362 	C$lab1_2.c$78$3$66 ==.
+                                   1363 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:78: for (i = 0; i < 10; ++i) {
+      000177 05 0E            [12] 1364 	inc	_i
+      000179 74 F6            [12] 1365 	mov	a,#0x100 - 0x0a
+      00017B 25 0E            [12] 1366 	add	a,_i
+      00017D 50 D5            [24] 1367 	jnc	00101$
+                           0000FB  1368 	C$lab1_2.c$90$3$66 ==.
+                                   1369 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:90: printf("Game is finished\r\n");
+      00017F 74 D5            [12] 1370 	mov	a,#___str_2
+      000181 C0 E0            [24] 1371 	push	acc
+      000183 74 0A            [12] 1372 	mov	a,#(___str_2 >> 8)
+      000185 C0 E0            [24] 1373 	push	acc
+      000187 74 80            [12] 1374 	mov	a,#0x80
+      000189 C0 E0            [24] 1375 	push	acc
+      00018B 12 04 6D         [24] 1376 	lcall	_printf
+      00018E 15 81            [12] 1377 	dec	sp
+      000190 15 81            [12] 1378 	dec	sp
+      000192 15 81            [12] 1379 	dec	sp
+                           000110  1380 	C$lab1_2.c$91$3$66 ==.
+                                   1381 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:91: printf("Number correct: %d\r\n", correct);
+      000194 C0 0A            [24] 1382 	push	_correct
+      000196 C0 0B            [24] 1383 	push	(_correct + 1)
+      000198 74 E8            [12] 1384 	mov	a,#___str_3
+      00019A C0 E0            [24] 1385 	push	acc
+      00019C 74 0A            [12] 1386 	mov	a,#(___str_3 >> 8)
+      00019E C0 E0            [24] 1387 	push	acc
+      0001A0 74 80            [12] 1388 	mov	a,#0x80
+      0001A2 C0 E0            [24] 1389 	push	acc
+      0001A4 12 04 6D         [24] 1390 	lcall	_printf
+      0001A7 E5 81            [12] 1391 	mov	a,sp
+      0001A9 24 FB            [12] 1392 	add	a,#0xfb
+      0001AB F5 81            [12] 1393 	mov	sp,a
+      0001AD                       1394 00112$:
+                           000129  1395 	C$lab1_2.c$94$2$64 ==.
+                                   1396 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:94: printf("Reset game to play again\r\n");
+      0001AD 74 FD            [12] 1397 	mov	a,#___str_4
+      0001AF C0 E0            [24] 1398 	push	acc
+      0001B1 74 0A            [12] 1399 	mov	a,#(___str_4 >> 8)
+      0001B3 C0 E0            [24] 1400 	push	acc
+      0001B5 74 80            [12] 1401 	mov	a,#0x80
+      0001B7 C0 E0            [24] 1402 	push	acc
+      0001B9 12 04 6D         [24] 1403 	lcall	_printf
+      0001BC 15 81            [12] 1404 	dec	sp
+      0001BE 15 81            [12] 1405 	dec	sp
+      0001C0 15 81            [12] 1406 	dec	sp
+                           00013E  1407 	C$lab1_2.c$95$2$64 ==.
+                                   1408 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:95: while(!SS);
+      0001C2                       1409 00113$:
+      0001C2 30 A0 FD         [24] 1410 	jnb	_SS,00113$
+      0001C5 02 01 22         [24] 1411 	ljmp	00117$
+                           000144  1412 	C$lab1_2.c$97$1$63 ==.
+                           000144  1413 	XG$main$0$0 ==.
+      0001C8 22               [24] 1414 	ret
+                                   1415 ;------------------------------------------------------------
+                                   1416 ;Allocation info for local variables in function 'Port_Init'
+                                   1417 ;------------------------------------------------------------
+                           000145  1418 	G$Port_Init$0$0 ==.
+                           000145  1419 	C$lab1_2.c$100$1$63 ==.
+                                   1420 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:100: void Port_Init(void)
+                                   1421 ;	-----------------------------------------
+                                   1422 ;	 function Port_Init
+                                   1423 ;	-----------------------------------------
+      0001C9                       1424 _Port_Init:
+                           000145  1425 	C$lab1_2.c$105$1$70 ==.
+                                   1426 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:105: P3MDOUT &= ~0x03;
+      0001C9 53 A7 FC         [24] 1427 	anl	_P3MDOUT,#0xfc
+                           000148  1428 	C$lab1_2.c$106$1$70 ==.
+                                   1429 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:106: P3MDOUT |= 0xF8;
+      0001CC 43 A7 F8         [24] 1430 	orl	_P3MDOUT,#0xf8
+                           00014B  1431 	C$lab1_2.c$107$1$70 ==.
+                                   1432 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:107: P3 |= 0x03;
+      0001CF 43 B0 03         [24] 1433 	orl	_P3,#0x03
+                           00014E  1434 	C$lab1_2.c$109$1$70 ==.
+                                   1435 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:109: P2MDOUT &= ~0x01;
+      0001D2 53 A6 FE         [24] 1436 	anl	_P2MDOUT,#0xfe
+                           000151  1437 	C$lab1_2.c$110$1$70 ==.
+                                   1438 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:110: P2 |= 0x01;
+      0001D5 43 A0 01         [24] 1439 	orl	_P2,#0x01
+                           000154  1440 	C$lab1_2.c$111$1$70 ==.
+                           000154  1441 	XG$Port_Init$0$0 ==.
+      0001D8 22               [24] 1442 	ret
+                                   1443 ;------------------------------------------------------------
+                                   1444 ;Allocation info for local variables in function 'Interrupt_Init'
+                                   1445 ;------------------------------------------------------------
+                           000155  1446 	G$Interrupt_Init$0$0 ==.
+                           000155  1447 	C$lab1_2.c$113$1$70 ==.
+                                   1448 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:113: void Interrupt_Init(void)
+                                   1449 ;	-----------------------------------------
+                                   1450 ;	 function Interrupt_Init
+                                   1451 ;	-----------------------------------------
+      0001D9                       1452 _Interrupt_Init:
+                           000155  1453 	C$lab1_2.c$115$1$72 ==.
+                                   1454 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:115: IE |= 0x02;      // enable Timer0 Interrupt request (by masking)
+      0001D9 43 A8 02         [24] 1455 	orl	_IE,#0x02
+                           000158  1456 	C$lab1_2.c$116$1$72 ==.
+                                   1457 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:116: EA = 1;       // enable global interrupts (by sbit)
+      0001DC D2 AF            [12] 1458 	setb	_EA
+                           00015A  1459 	C$lab1_2.c$117$1$72 ==.
+                           00015A  1460 	XG$Interrupt_Init$0$0 ==.
+      0001DE 22               [24] 1461 	ret
+                                   1462 ;------------------------------------------------------------
+                                   1463 ;Allocation info for local variables in function 'Timer_Init'
+                                   1464 ;------------------------------------------------------------
+                           00015B  1465 	G$Timer_Init$0$0 ==.
+                           00015B  1466 	C$lab1_2.c$119$1$72 ==.
+                                   1467 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:119: void Timer_Init(void)
+                                   1468 ;	-----------------------------------------
+                                   1469 ;	 function Timer_Init
+                                   1470 ;	-----------------------------------------
+      0001DF                       1471 _Timer_Init:
+                           00015B  1472 	C$lab1_2.c$122$1$74 ==.
+                                   1473 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:122: CKCON |= 0x08;  // Timer0 uses SYSCLK as source
+      0001DF 43 8E 08         [24] 1474 	orl	_CKCON,#0x08
+                           00015E  1475 	C$lab1_2.c$123$1$74 ==.
+                                   1476 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:123: TMOD &= ~0x0F;   // clear the 4 least significant bits
+      0001E2 53 89 F0         [24] 1477 	anl	_TMOD,#0xf0
+                           000161  1478 	C$lab1_2.c$124$1$74 ==.
+                                   1479 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:124: TMOD |= 0x01;   // Timer0 in mode 1
+      0001E5 43 89 01         [24] 1480 	orl	_TMOD,#0x01
+                           000164  1481 	C$lab1_2.c$125$1$74 ==.
+                                   1482 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:125: TR0 = 0;           // Stop Timer0
+      0001E8 C2 8C            [12] 1483 	clr	_TR0
+                           000166  1484 	C$lab1_2.c$126$1$74 ==.
+                                   1485 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:126: TMR0 = 0;           // Clear high & low byte of T0
+      0001EA E4               [12] 1486 	clr	a
+      0001EB F5 8A            [12] 1487 	mov	((_TMR0 >> 0) & 0xFF),a
+      0001ED F5 8C            [12] 1488 	mov	((_TMR0 >> 8) & 0xFF),a
+                           00016B  1489 	C$lab1_2.c$128$1$74 ==.
+                           00016B  1490 	XG$Timer_Init$0$0 ==.
+      0001EF 22               [24] 1491 	ret
+                                   1492 ;------------------------------------------------------------
+                                   1493 ;Allocation info for local variables in function 'Timer0_ISR'
+                                   1494 ;------------------------------------------------------------
+                           00016C  1495 	G$Timer0_ISR$0$0 ==.
+                           00016C  1496 	C$lab1_2.c$132$1$74 ==.
+                                   1497 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:132: void Timer0_ISR(void) __interrupt 1
+                                   1498 ;	-----------------------------------------
+                                   1499 ;	 function Timer0_ISR
+                                   1500 ;	-----------------------------------------
+      0001F0                       1501 _Timer0_ISR:
+      0001F0 C0 E0            [24] 1502 	push	acc
+      0001F2 C0 D0            [24] 1503 	push	psw
+                           000170  1504 	C$lab1_2.c$136$1$76 ==.
+                                   1505 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:136: Counts++;
+      0001F4 05 08            [12] 1506 	inc	_Counts
+      0001F6 E4               [12] 1507 	clr	a
+      0001F7 B5 08 02         [24] 1508 	cjne	a,_Counts,00103$
+      0001FA 05 09            [12] 1509 	inc	(_Counts + 1)
+      0001FC                       1510 00103$:
+      0001FC D0 D0            [24] 1511 	pop	psw
+      0001FE D0 E0            [24] 1512 	pop	acc
+                           00017C  1513 	C$lab1_2.c$137$1$76 ==.
+                           00017C  1514 	XG$Timer0_ISR$0$0 ==.
+      000200 32               [24] 1515 	reti
+                                   1516 ;	eliminated unneeded mov psw,# (no regs used in bank)
+                                   1517 ;	eliminated unneeded push/pop dpl
+                                   1518 ;	eliminated unneeded push/pop dph
+                                   1519 ;	eliminated unneeded push/pop b
+                                   1520 ;------------------------------------------------------------
+                                   1521 ;Allocation info for local variables in function 'random'
+                                   1522 ;------------------------------------------------------------
+                           00017D  1523 	G$random$0$0 ==.
+                           00017D  1524 	C$lab1_2.c$146$1$76 ==.
+                                   1525 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:146: unsigned char random(void)
+                                   1526 ;	-----------------------------------------
+                                   1527 ;	 function random
+                                   1528 ;	-----------------------------------------
+      000201                       1529 _random:
+                           00017D  1530 	C$lab1_2.c$148$1$78 ==.
+                                   1531 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:148: return (rand()%3);  // rand returns a random number between 0 and 32767.
+      000201 12 03 43         [24] 1532 	lcall	_rand
+      000204 75 19 03         [24] 1533 	mov	__modsint_PARM_2,#0x03
+      000207 75 1A 00         [24] 1534 	mov	(__modsint_PARM_2 + 1),#0x00
+      00020A 12 0A 84         [24] 1535 	lcall	__modsint
+                           000189  1536 	C$lab1_2.c$152$1$78 ==.
+                           000189  1537 	XG$random$0$0 ==.
+      00020D 22               [24] 1538 	ret
+                                   1539 ;------------------------------------------------------------
+                                   1540 ;Allocation info for local variables in function 'Check'
+                                   1541 ;------------------------------------------------------------
+                                   1542 ;num                       Allocated to registers r7 
+                                   1543 ;------------------------------------------------------------
+                           00018A  1544 	G$Check$0$0 ==.
+                           00018A  1545 	C$lab1_2.c$154$1$78 ==.
+                                   1546 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:154: void Check(unsigned char num) {
+                                   1547 ;	-----------------------------------------
+                                   1548 ;	 function Check
+                                   1549 ;	-----------------------------------------
+      00020E                       1550 _Check:
+      00020E AF 82            [24] 1551 	mov	r7,dpl
+                           00018C  1552 	C$lab1_2.c$155$1$80 ==.
+                                   1553 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:155: pressed = 0;
+      000210 E4               [12] 1554 	clr	a
+      000211 F5 0C            [12] 1555 	mov	_pressed,a
+      000213 F5 0D            [12] 1556 	mov	(_pressed + 1),a
+                           000191  1557 	C$lab1_2.c$156$1$80 ==.
+                                   1558 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:156: Biled_Off();
+      000215 C0 07            [24] 1559 	push	ar7
+      000217 12 03 28         [24] 1560 	lcall	_Biled_Off
+      00021A D0 07            [24] 1561 	pop	ar7
+                           000198  1562 	C$lab1_2.c$157$1$80 ==.
+                                   1563 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:157: if (num == 0) {
+      00021C EF               [12] 1564 	mov	a,r7
+      00021D 70 54            [24] 1565 	jnz	00155$
+                           00019B  1566 	C$lab1_2.c$158$2$81 ==.
+                                   1567 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:158: LED0_On();
+      00021F 12 03 2D         [24] 1568 	lcall	_LED0_On
+                           00019E  1569 	C$lab1_2.c$159$2$81 ==.
+                                   1570 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:159: Counts = 0;
+      000222 E4               [12] 1571 	clr	a
+      000223 F5 08            [12] 1572 	mov	_Counts,a
+      000225 F5 09            [12] 1573 	mov	(_Counts + 1),a
+                           0001A3  1574 	C$lab1_2.c$160$2$81 ==.
+                                   1575 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:160: while (Counts < 337) {
+      000227                       1576 00112$:
+      000227 C3               [12] 1577 	clr	c
+      000228 E5 08            [12] 1578 	mov	a,_Counts
+      00022A 94 51            [12] 1579 	subb	a,#0x51
+      00022C E5 09            [12] 1580 	mov	a,(_Counts + 1)
+      00022E 94 01            [12] 1581 	subb	a,#0x01
+      000230 50 2A            [24] 1582 	jnc	00114$
+                           0001AE  1583 	C$lab1_2.c$161$3$82 ==.
+                                   1584 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:161: if (!PB0 && PB1) {  // WHEN CORRECT
+      000232 20 B0 10         [24] 1585 	jb	_PB0,00109$
+      000235 30 B1 0D         [24] 1586 	jnb	_PB1,00109$
+                           0001B4  1587 	C$lab1_2.c$162$4$83 ==.
+                                   1588 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:162: pressed++;
+      000238 05 0C            [12] 1589 	inc	_pressed
+      00023A E4               [12] 1590 	clr	a
+      00023B B5 0C 02         [24] 1591 	cjne	a,_pressed,00244$
+      00023E 05 0D            [12] 1592 	inc	(_pressed + 1)
+      000240                       1593 00244$:
+                           0001BC  1594 	C$lab1_2.c$163$4$83 ==.
+                                   1595 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:163: Green();
+      000240 12 03 23         [24] 1596 	lcall	_Green
+      000243 80 E2            [24] 1597 	sjmp	00112$
+      000245                       1598 00109$:
+                           0001C1  1599 	C$lab1_2.c$164$3$82 ==.
+                                   1600 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:164: } else if ((!PB0 && !PB1) || (PB0 && !PB1) || (PB0 && PB1)) { // WHEN INCORRECT (BOTH NOT PRESSED, OTHER BUTTON PRESSED
+      000245 20 B0 03         [24] 1601 	jb	_PB0,00105$
+      000248 30 B1 0C         [24] 1602 	jnb	_PB1,00101$
+      00024B                       1603 00105$:
+      00024B 30 B0 03         [24] 1604 	jnb	_PB0,00107$
+      00024E 30 B1 06         [24] 1605 	jnb	_PB1,00101$
+      000251                       1606 00107$:
+      000251 30 B0 D3         [24] 1607 	jnb	_PB0,00112$
+      000254 30 B1 D0         [24] 1608 	jnb	_PB1,00112$
+      000257                       1609 00101$:
+                           0001D3  1610 	C$lab1_2.c$165$4$84 ==.
+                                   1611 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:165: Red();												      // BOTH BUTTONS PRESSED)
+      000257 12 03 1E         [24] 1612 	lcall	_Red
+      00025A 80 CB            [24] 1613 	sjmp	00112$
+      00025C                       1614 00114$:
+                           0001D8  1615 	C$lab1_2.c$168$2$81 ==.
+                                   1616 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:168: if (pressed > 0) {
+      00025C E5 0C            [12] 1617 	mov	a,_pressed
+      00025E 45 0D            [12] 1618 	orl	a,(_pressed + 1)
+      000260 60 08            [24] 1619 	jz	00116$
+                           0001DE  1620 	C$lab1_2.c$169$3$85 ==.
+                                   1621 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:169: correct++;
+      000262 05 0A            [12] 1622 	inc	_correct
+      000264 E4               [12] 1623 	clr	a
+      000265 B5 0A 02         [24] 1624 	cjne	a,_correct,00252$
+      000268 05 0B            [12] 1625 	inc	(_correct + 1)
+      00026A                       1626 00252$:
+      00026A                       1627 00116$:
+                           0001E6  1628 	C$lab1_2.c$171$2$81 ==.
+                                   1629 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:171: Biled_Off();
+      00026A 12 03 28         [24] 1630 	lcall	_Biled_Off
+                           0001E9  1631 	C$lab1_2.c$172$2$81 ==.
+                                   1632 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:172: LED0_Off();
+      00026D 12 03 30         [24] 1633 	lcall	_LED0_Off
+      000270 02 03 1D         [24] 1634 	ljmp	00157$
+      000273                       1635 00155$:
+                           0001EF  1636 	C$lab1_2.c$173$1$80 ==.
+                                   1637 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:173: } else if (num == 1) {
+      000273 BF 01 53         [24] 1638 	cjne	r7,#0x01,00152$
+                           0001F2  1639 	C$lab1_2.c$174$2$86 ==.
+                                   1640 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:174: LED1_On();
+      000276 12 03 33         [24] 1641 	lcall	_LED1_On
+                           0001F5  1642 	C$lab1_2.c$175$2$86 ==.
+                                   1643 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:175: Counts = 0;
+      000279 E4               [12] 1644 	clr	a
+      00027A F5 08            [12] 1645 	mov	_Counts,a
+      00027C F5 09            [12] 1646 	mov	(_Counts + 1),a
+                           0001FA  1647 	C$lab1_2.c$176$2$86 ==.
+                                   1648 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:176: while(Counts < 337) {
+      00027E                       1649 00128$:
+      00027E C3               [12] 1650 	clr	c
+      00027F E5 08            [12] 1651 	mov	a,_Counts
+      000281 94 51            [12] 1652 	subb	a,#0x51
+      000283 E5 09            [12] 1653 	mov	a,(_Counts + 1)
+      000285 94 01            [12] 1654 	subb	a,#0x01
+      000287 50 2A            [24] 1655 	jnc	00130$
+                           000205  1656 	C$lab1_2.c$177$3$87 ==.
+                                   1657 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:177: if (PB0 && !PB1) {
+      000289 30 B0 10         [24] 1658 	jnb	_PB0,00125$
+      00028C 20 B1 0D         [24] 1659 	jb	_PB1,00125$
+                           00020B  1660 	C$lab1_2.c$178$4$88 ==.
+                                   1661 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:178: pressed++;
+      00028F 05 0C            [12] 1662 	inc	_pressed
+      000291 E4               [12] 1663 	clr	a
+      000292 B5 0C 02         [24] 1664 	cjne	a,_pressed,00258$
+      000295 05 0D            [12] 1665 	inc	(_pressed + 1)
+      000297                       1666 00258$:
+                           000213  1667 	C$lab1_2.c$179$4$88 ==.
+                                   1668 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:179: Green();
+      000297 12 03 23         [24] 1669 	lcall	_Green
+      00029A 80 E2            [24] 1670 	sjmp	00128$
+      00029C                       1671 00125$:
+                           000218  1672 	C$lab1_2.c$180$3$87 ==.
+                                   1673 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:180: } else if ((!PB0 && !PB1) || (!PB0 && PB1) || (PB0 && PB1)) { // WHEN INCORRECT (BOTH NOT PRESSED, OTHER BUTTON PRESSED
+      00029C 20 B0 03         [24] 1674 	jb	_PB0,00121$
+      00029F 30 B1 0C         [24] 1675 	jnb	_PB1,00117$
+      0002A2                       1676 00121$:
+      0002A2 20 B0 03         [24] 1677 	jb	_PB0,00123$
+      0002A5 20 B1 06         [24] 1678 	jb	_PB1,00117$
+      0002A8                       1679 00123$:
+      0002A8 30 B0 D3         [24] 1680 	jnb	_PB0,00128$
+      0002AB 30 B1 D0         [24] 1681 	jnb	_PB1,00128$
+      0002AE                       1682 00117$:
+                           00022A  1683 	C$lab1_2.c$181$4$89 ==.
+                                   1684 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:181: Red();                                                    // BOTH BUTTONS PRESSED)
+      0002AE 12 03 1E         [24] 1685 	lcall	_Red
+      0002B1 80 CB            [24] 1686 	sjmp	00128$
+      0002B3                       1687 00130$:
+                           00022F  1688 	C$lab1_2.c$184$2$86 ==.
+                                   1689 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:184: if (pressed > 0) {
+      0002B3 E5 0C            [12] 1690 	mov	a,_pressed
+      0002B5 45 0D            [12] 1691 	orl	a,(_pressed + 1)
+      0002B7 60 08            [24] 1692 	jz	00132$
+                           000235  1693 	C$lab1_2.c$185$3$90 ==.
+                                   1694 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:185: correct++;
+      0002B9 05 0A            [12] 1695 	inc	_correct
+      0002BB E4               [12] 1696 	clr	a
+      0002BC B5 0A 02         [24] 1697 	cjne	a,_correct,00266$
+      0002BF 05 0B            [12] 1698 	inc	(_correct + 1)
+      0002C1                       1699 00266$:
+      0002C1                       1700 00132$:
+                           00023D  1701 	C$lab1_2.c$187$2$86 ==.
+                                   1702 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:187: Biled_Off();
+      0002C1 12 03 28         [24] 1703 	lcall	_Biled_Off
+                           000240  1704 	C$lab1_2.c$188$2$86 ==.
+                                   1705 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:188: LED1_Off();
+      0002C4 12 03 36         [24] 1706 	lcall	_LED1_Off
+      0002C7 80 54            [24] 1707 	sjmp	00157$
+      0002C9                       1708 00152$:
+                           000245  1709 	C$lab1_2.c$189$1$80 ==.
+                                   1710 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:189: } else if (num == 2) {
+      0002C9 BF 02 51         [24] 1711 	cjne	r7,#0x02,00157$
+                           000248  1712 	C$lab1_2.c$190$2$91 ==.
+                                   1713 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:190: Both_On();
+      0002CC 12 03 39         [24] 1714 	lcall	_Both_On
+                           00024B  1715 	C$lab1_2.c$191$2$91 ==.
+                                   1716 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:191: Counts = 0;
+      0002CF E4               [12] 1717 	clr	a
+      0002D0 F5 08            [12] 1718 	mov	_Counts,a
+      0002D2 F5 09            [12] 1719 	mov	(_Counts + 1),a
+                           000250  1720 	C$lab1_2.c$192$2$91 ==.
+                                   1721 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:192: while (Counts < 337) {
+      0002D4                       1722 00144$:
+      0002D4 C3               [12] 1723 	clr	c
+      0002D5 E5 08            [12] 1724 	mov	a,_Counts
+      0002D7 94 51            [12] 1725 	subb	a,#0x51
+      0002D9 E5 09            [12] 1726 	mov	a,(_Counts + 1)
+      0002DB 94 01            [12] 1727 	subb	a,#0x01
+      0002DD 50 2A            [24] 1728 	jnc	00146$
+                           00025B  1729 	C$lab1_2.c$193$3$92 ==.
+                                   1730 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:193: if (!PB0 && !PB1) {
+      0002DF 20 B0 10         [24] 1731 	jb	_PB0,00141$
+      0002E2 20 B1 0D         [24] 1732 	jb	_PB1,00141$
+                           000261  1733 	C$lab1_2.c$194$4$93 ==.
+                                   1734 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:194: pressed++;
+      0002E5 05 0C            [12] 1735 	inc	_pressed
+      0002E7 E4               [12] 1736 	clr	a
+      0002E8 B5 0C 02         [24] 1737 	cjne	a,_pressed,00272$
+      0002EB 05 0D            [12] 1738 	inc	(_pressed + 1)
+      0002ED                       1739 00272$:
+                           000269  1740 	C$lab1_2.c$195$4$93 ==.
+                                   1741 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:195: Green();
+      0002ED 12 03 23         [24] 1742 	lcall	_Green
+      0002F0 80 E2            [24] 1743 	sjmp	00144$
+      0002F2                       1744 00141$:
+                           00026E  1745 	C$lab1_2.c$196$3$92 ==.
+                                   1746 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:196: } else if ((PB0 && PB1) || (!PB0 && PB1) || (PB0 && !PB1)) { // WHEN INCORRECT (BOTH NOT PRESSED, ONE BUTTON PRESSED)
+      0002F2 30 B0 03         [24] 1747 	jnb	_PB0,00137$
+      0002F5 20 B1 0C         [24] 1748 	jb	_PB1,00133$
+      0002F8                       1749 00137$:
+      0002F8 20 B0 03         [24] 1750 	jb	_PB0,00139$
+      0002FB 20 B1 06         [24] 1751 	jb	_PB1,00133$
+      0002FE                       1752 00139$:
+      0002FE 30 B0 D3         [24] 1753 	jnb	_PB0,00144$
+      000301 20 B1 D0         [24] 1754 	jb	_PB1,00144$
+      000304                       1755 00133$:
+                           000280  1756 	C$lab1_2.c$197$4$94 ==.
+                                   1757 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:197: Red();                                                     
+      000304 12 03 1E         [24] 1758 	lcall	_Red
+      000307 80 CB            [24] 1759 	sjmp	00144$
+      000309                       1760 00146$:
+                           000285  1761 	C$lab1_2.c$200$2$91 ==.
+                                   1762 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:200: if (pressed > 0) {
+      000309 E5 0C            [12] 1763 	mov	a,_pressed
+      00030B 45 0D            [12] 1764 	orl	a,(_pressed + 1)
+      00030D 60 08            [24] 1765 	jz	00148$
+                           00028B  1766 	C$lab1_2.c$201$3$95 ==.
+                                   1767 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:201: correct++;
+      00030F 05 0A            [12] 1768 	inc	_correct
+      000311 E4               [12] 1769 	clr	a
+      000312 B5 0A 02         [24] 1770 	cjne	a,_correct,00280$
+      000315 05 0B            [12] 1771 	inc	(_correct + 1)
+      000317                       1772 00280$:
+      000317                       1773 00148$:
+                           000293  1774 	C$lab1_2.c$203$2$91 ==.
+                                   1775 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:203: Biled_Off();
+      000317 12 03 28         [24] 1776 	lcall	_Biled_Off
+                           000296  1777 	C$lab1_2.c$204$2$91 ==.
+                                   1778 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:204: Both_Off();
+      00031A 12 03 3E         [24] 1779 	lcall	_Both_Off
+      00031D                       1780 00157$:
+                           000299  1781 	C$lab1_2.c$206$1$80 ==.
+                           000299  1782 	XG$Check$0$0 ==.
+      00031D 22               [24] 1783 	ret
+                                   1784 ;------------------------------------------------------------
+                                   1785 ;Allocation info for local variables in function 'Red'
+                                   1786 ;------------------------------------------------------------
+                           00029A  1787 	G$Red$0$0 ==.
+                           00029A  1788 	C$lab1_2.c$209$1$80 ==.
+                                   1789 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:209: void Red(void) {
+                                   1790 ;	-----------------------------------------
+                                   1791 ;	 function Red
+                                   1792 ;	-----------------------------------------
+      00031E                       1793 _Red:
+                           00029A  1794 	C$lab1_2.c$210$1$97 ==.
+                                   1795 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:210: BILED0 = 0;
+      00031E C2 B3            [12] 1796 	clr	_BILED0
+                           00029C  1797 	C$lab1_2.c$211$1$97 ==.
+                                   1798 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:211: BILED1 = 1;
+      000320 D2 B4            [12] 1799 	setb	_BILED1
+                           00029E  1800 	C$lab1_2.c$212$1$97 ==.
+                           00029E  1801 	XG$Red$0$0 ==.
+      000322 22               [24] 1802 	ret
+                                   1803 ;------------------------------------------------------------
+                                   1804 ;Allocation info for local variables in function 'Green'
+                                   1805 ;------------------------------------------------------------
+                           00029F  1806 	G$Green$0$0 ==.
+                           00029F  1807 	C$lab1_2.c$214$1$97 ==.
+                                   1808 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:214: void Green(void) {
+                                   1809 ;	-----------------------------------------
+                                   1810 ;	 function Green
+                                   1811 ;	-----------------------------------------
+      000323                       1812 _Green:
+                           00029F  1813 	C$lab1_2.c$215$1$99 ==.
+                                   1814 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:215: BILED0 = 1;
+      000323 D2 B3            [12] 1815 	setb	_BILED0
+                           0002A1  1816 	C$lab1_2.c$216$1$99 ==.
+                                   1817 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:216: BILED1 = 0;
+      000325 C2 B4            [12] 1818 	clr	_BILED1
+                           0002A3  1819 	C$lab1_2.c$217$1$99 ==.
+                           0002A3  1820 	XG$Green$0$0 ==.
+      000327 22               [24] 1821 	ret
+                                   1822 ;------------------------------------------------------------
+                                   1823 ;Allocation info for local variables in function 'Biled_Off'
+                                   1824 ;------------------------------------------------------------
+                           0002A4  1825 	G$Biled_Off$0$0 ==.
+                           0002A4  1826 	C$lab1_2.c$219$1$99 ==.
+                                   1827 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:219: void Biled_Off(void) {
+                                   1828 ;	-----------------------------------------
+                                   1829 ;	 function Biled_Off
+                                   1830 ;	-----------------------------------------
+      000328                       1831 _Biled_Off:
+                           0002A4  1832 	C$lab1_2.c$220$1$101 ==.
+                                   1833 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:220: BILED0 = 0;
+      000328 C2 B3            [12] 1834 	clr	_BILED0
+                           0002A6  1835 	C$lab1_2.c$221$1$101 ==.
+                                   1836 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:221: BILED1 = 0;
+      00032A C2 B4            [12] 1837 	clr	_BILED1
+                           0002A8  1838 	C$lab1_2.c$222$1$101 ==.
+                           0002A8  1839 	XG$Biled_Off$0$0 ==.
+      00032C 22               [24] 1840 	ret
+                                   1841 ;------------------------------------------------------------
+                                   1842 ;Allocation info for local variables in function 'LED0_On'
+                                   1843 ;------------------------------------------------------------
+                           0002A9  1844 	G$LED0_On$0$0 ==.
+                           0002A9  1845 	C$lab1_2.c$224$1$101 ==.
+                                   1846 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:224: void LED0_On(void) {
+                                   1847 ;	-----------------------------------------
+                                   1848 ;	 function LED0_On
+                                   1849 ;	-----------------------------------------
+      00032D                       1850 _LED0_On:
+                           0002A9  1851 	C$lab1_2.c$225$1$103 ==.
+                                   1852 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:225: LED0 = 0;
+      00032D C2 B5            [12] 1853 	clr	_LED0
+                           0002AB  1854 	C$lab1_2.c$226$1$103 ==.
+                           0002AB  1855 	XG$LED0_On$0$0 ==.
+      00032F 22               [24] 1856 	ret
+                                   1857 ;------------------------------------------------------------
+                                   1858 ;Allocation info for local variables in function 'LED0_Off'
+                                   1859 ;------------------------------------------------------------
+                           0002AC  1860 	G$LED0_Off$0$0 ==.
+                           0002AC  1861 	C$lab1_2.c$228$1$103 ==.
+                                   1862 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:228: void LED0_Off(void) {
+                                   1863 ;	-----------------------------------------
+                                   1864 ;	 function LED0_Off
+                                   1865 ;	-----------------------------------------
+      000330                       1866 _LED0_Off:
+                           0002AC  1867 	C$lab1_2.c$229$1$105 ==.
+                                   1868 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:229: LED0 = 1;
+      000330 D2 B5            [12] 1869 	setb	_LED0
+                           0002AE  1870 	C$lab1_2.c$230$1$105 ==.
+                           0002AE  1871 	XG$LED0_Off$0$0 ==.
+      000332 22               [24] 1872 	ret
+                                   1873 ;------------------------------------------------------------
+                                   1874 ;Allocation info for local variables in function 'LED1_On'
+                                   1875 ;------------------------------------------------------------
+                           0002AF  1876 	G$LED1_On$0$0 ==.
+                           0002AF  1877 	C$lab1_2.c$232$1$105 ==.
+                                   1878 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:232: void LED1_On(void) {
+                                   1879 ;	-----------------------------------------
+                                   1880 ;	 function LED1_On
+                                   1881 ;	-----------------------------------------
+      000333                       1882 _LED1_On:
+                           0002AF  1883 	C$lab1_2.c$233$1$107 ==.
+                                   1884 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:233: LED1 = 0;
+      000333 C2 B6            [12] 1885 	clr	_LED1
+                           0002B1  1886 	C$lab1_2.c$234$1$107 ==.
+                           0002B1  1887 	XG$LED1_On$0$0 ==.
+      000335 22               [24] 1888 	ret
+                                   1889 ;------------------------------------------------------------
+                                   1890 ;Allocation info for local variables in function 'LED1_Off'
+                                   1891 ;------------------------------------------------------------
+                           0002B2  1892 	G$LED1_Off$0$0 ==.
+                           0002B2  1893 	C$lab1_2.c$236$1$107 ==.
+                                   1894 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:236: void LED1_Off(void) {
+                                   1895 ;	-----------------------------------------
+                                   1896 ;	 function LED1_Off
+                                   1897 ;	-----------------------------------------
+      000336                       1898 _LED1_Off:
+                           0002B2  1899 	C$lab1_2.c$237$1$109 ==.
+                                   1900 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:237: LED1 = 1;
+      000336 D2 B6            [12] 1901 	setb	_LED1
+                           0002B4  1902 	C$lab1_2.c$238$1$109 ==.
+                           0002B4  1903 	XG$LED1_Off$0$0 ==.
+      000338 22               [24] 1904 	ret
+                                   1905 ;------------------------------------------------------------
+                                   1906 ;Allocation info for local variables in function 'Both_On'
+                                   1907 ;------------------------------------------------------------
+                           0002B5  1908 	G$Both_On$0$0 ==.
+                           0002B5  1909 	C$lab1_2.c$240$1$109 ==.
+                                   1910 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:240: void Both_On(void) {
+                                   1911 ;	-----------------------------------------
+                                   1912 ;	 function Both_On
+                                   1913 ;	-----------------------------------------
+      000339                       1914 _Both_On:
+                           0002B5  1915 	C$lab1_2.c$241$1$111 ==.
+                                   1916 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:241: LED0 = 0;
+      000339 C2 B5            [12] 1917 	clr	_LED0
+                           0002B7  1918 	C$lab1_2.c$242$1$111 ==.
+                                   1919 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:242: LED1 = 0;
+      00033B C2 B6            [12] 1920 	clr	_LED1
+                           0002B9  1921 	C$lab1_2.c$243$1$111 ==.
+                           0002B9  1922 	XG$Both_On$0$0 ==.
+      00033D 22               [24] 1923 	ret
+                                   1924 ;------------------------------------------------------------
+                                   1925 ;Allocation info for local variables in function 'Both_Off'
+                                   1926 ;------------------------------------------------------------
+                           0002BA  1927 	G$Both_Off$0$0 ==.
+                           0002BA  1928 	C$lab1_2.c$245$1$111 ==.
+                                   1929 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:245: void Both_Off(void) {
+                                   1930 ;	-----------------------------------------
+                                   1931 ;	 function Both_Off
+                                   1932 ;	-----------------------------------------
+      00033E                       1933 _Both_Off:
+                           0002BA  1934 	C$lab1_2.c$246$1$113 ==.
+                                   1935 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:246: LED0 = 1;
+      00033E D2 B5            [12] 1936 	setb	_LED0
+                           0002BC  1937 	C$lab1_2.c$247$1$113 ==.
+                                   1938 ;	C:\Users\Victor\Documents\RPI\LITEC\lab1\lab1-2\lab1-2.c:247: LED1 = 1;
+      000340 D2 B6            [12] 1939 	setb	_LED1
+                           0002BE  1940 	C$lab1_2.c$248$1$113 ==.
+                           0002BE  1941 	XG$Both_Off$0$0 ==.
+      000342 22               [24] 1942 	ret
+                                   1943 	.area CSEG    (CODE)
+                                   1944 	.area CONST   (CODE)
+                           000000  1945 Flab1_2$__str_0$0$0 == .
+      000ABE                       1946 ___str_0:
+      000ABE 53 74 61 72 74        1947 	.ascii "Start"
+      000AC3 0D                    1948 	.db 0x0d
+      000AC4 0A                    1949 	.db 0x0a
+      000AC5 00                    1950 	.db 0x00
+                           000008  1951 Flab1_2$__str_1$0$0 == .
+      000AC6                       1952 ___str_1:
+      000AC6 47 61 6D 65 20 62 65  1953 	.ascii "Game begins!"
+             67 69 6E 73 21
+      000AD2 0D                    1954 	.db 0x0d
+      000AD3 0A                    1955 	.db 0x0a
+      000AD4 00                    1956 	.db 0x00
+                           000017  1957 Flab1_2$__str_2$0$0 == .
+      000AD5                       1958 ___str_2:
+      000AD5 47 61 6D 65 20 69 73  1959 	.ascii "Game is finished"
+             20 66 69 6E 69 73 68
+             65 64
+      000AE5 0D                    1960 	.db 0x0d
+      000AE6 0A                    1961 	.db 0x0a
+      000AE7 00                    1962 	.db 0x00
+                           00002A  1963 Flab1_2$__str_3$0$0 == .
+      000AE8                       1964 ___str_3:
+      000AE8 4E 75 6D 62 65 72 20  1965 	.ascii "Number correct: %d"
+             63 6F 72 72 65 63 74
+             3A 20 25 64
+      000AFA 0D                    1966 	.db 0x0d
+      000AFB 0A                    1967 	.db 0x0a
+      000AFC 00                    1968 	.db 0x00
+                           00003F  1969 Flab1_2$__str_4$0$0 == .
+      000AFD                       1970 ___str_4:
+      000AFD 52 65 73 65 74 20 67  1971 	.ascii "Reset game to play again"
+             61 6D 65 20 74 6F 20
+             70 6C 61 79 20 61 67
+             61 69 6E
+      000B15 0D                    1972 	.db 0x0d
+      000B16 0A                    1973 	.db 0x0a
+      000B17 00                    1974 	.db 0x00
+                                   1975 	.area XINIT   (CODE)
+                                   1976 	.area CABS    (ABS,CODE)

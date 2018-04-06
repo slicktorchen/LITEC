@@ -1,0 +1,139 @@
+/* Sample code for Lab 3.1. This code provides a basic start. */
+#include <c8051_SDCC.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define PW_CENTER 2767
+#define PW_MIN 2029
+#define PW_MAX 3505
+//-----------------------------------------------------------------------------
+// Function Prototypes
+//-----------------------------------------------------------------------------
+void Port_Init(void);
+void PCA_Init (void);
+void XBR0_Init();
+void Drive_Motor(void);
+void PCA_ISR ( void ) __interrupt 9;
+
+//-----------------------------------------------------------------------------
+// Global Variables
+//-----------------------------------------------------------------------------
+
+unsigned int PW = 0;
+unsigned int PCA_count = 0;
+char input;
+
+
+//-----------------------------------------------------------------------------
+// Main Function
+//-----------------------------------------------------------------------------
+void main(void)
+{
+    // initialize board
+    Sys_Init();
+    putchar(' '); //the quotes in this line may not format correctly
+    Port_Init();
+    XBR0_Init();
+    PCA_Init();
+    //print beginning message
+    printf("Embedded Control Steering Calibration\n");
+    // set the PCA output to a neutral setting
+    //__________________________________________
+    //__________________________________________
+    PW = PW_CENTER;
+	PCA0CP1 = 0xFFFF - PW;
+	PCA_count = 0;
+    //__________________________________________
+    //__________________________________________
+    while(1)
+        Drive_Motor();
+}
+
+//-----------------------------------------------------------------------------
+// Port_Init
+//-----------------------------------------------------------------------------
+//
+// Set up ports for input and output
+//
+void Port_Init()
+{
+    P1MDOUT |= 0x09;  // set pins 0-2 of port 1 to push-pull
+	
+}
+
+//-----------------------------------------------------------------------------
+// XBR0_Init
+//-----------------------------------------------------------------------------
+//
+// Set up the crossbar
+//
+void XBR0_Init()
+{
+    XBR0 = 0x27;  //configure crossbar as directed in the laboratory
+
+}
+
+//-----------------------------------------------------------------------------
+// PCA_Init
+//-----------------------------------------------------------------------------
+//
+// Set up Programmable Counter Array
+//
+void PCA_Init(void)
+{
+	PCA0MD = 0x81;    // SYSCLK/12, enable CF interrupts
+    PCA0CPM1 = 0xC2;  // 16 bit, enable compare, enable PWM
+	PCA0CN |= 0x40;   // enable PCA counter
+	EIE1 |= 0x08;     // enable PCA interrupt
+	EA = 1;           // enable global interrupts
+	// reference to the sample code in Example 4.5 -Pulse Width Modulation 
+    // implemented using the PCA (Programmable Counter Array), p. 50 in Lab Manual.
+}
+
+//-----------------------------------------------------------------------------
+// PCA_ISR
+//-----------------------------------------------------------------------------
+//
+// Interrupt Service Routine for Programmable Counter Array Overflow Interrupt
+//
+void PCA_ISR ( void ) __interrupt 9
+{
+	if (CF) {
+		PCA0 = 0x7000;
+		PCA_count++;// start count
+		CF = 0;                      // clear interrupt flag
+	} else {
+		PCA0CN &= 0xC0;              // all other interrupt types
+    // reference to the sample code in Example 4.5 -Pulse Width Modulation 
+    // implemented using the PCA (Programmable Counter Array), p. 50 in Lab Manual.
+	}
+}
+
+void Drive_Motor(void)
+{
+    char input;
+    //wait for a key to be pressed
+    input = getchar();
+    if(input == 'r')  // single character input to increase the pulsewidth
+    {
+		if(PW < PW_MAX) {
+			PW += 10;
+			//PCA0CP2 = 65536 - PW;
+		}
+        if(PW < PW_MIN) { // check if less than pulsewidth minimum
+			PW = PW_MIN;  // set SERVO_PW to a minimum value
+		}
+    }
+    else if(input == 'l')  // single character input to decrease the pulsewidth
+    {
+		if (PW > PW_MIN) {
+        	PW -= 10;
+			//PCA0CP2 = 65536 - PW;
+		}
+        if(PW > PW_MAX) { // check if pulsewidth maximum exceeded
+			PW = PW_MAX;  // set PW to a maximum value
+		}
+    }
+    printf("PW: %u\r\n", PW);
+    PCA0CP1 = 0xFFFF - PW;
+
+}

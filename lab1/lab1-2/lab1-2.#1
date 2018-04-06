@@ -1,0 +1,248 @@
+/*  Names: Steven Breeding, Victor Chen, Adam Morgan
+    Section: 4 A
+    Date: 2/7/17
+    File name: lab1-2.c
+    Description:
+*/
+/*
+  This program demonstrates the use of T0 interrupts. The code will count the
+  number of T0 timer overflows that occur while a slide switch is in the ON position.
+*/
+
+#include <c8051_SDCC.h>// include files. This file is available online
+#include <stdio.h>
+#include <stdlib.h>
+
+//-----------------------------------------------------------------------------
+// Function Prototypes
+//-----------------------------------------------------------------------------
+void Port_Init(void);      // Initialize ports for input and output
+void Timer_Init(void);     // Initialize Timer 0 
+void Interrupt_Init(void); //Initialize interrupts
+void Timer0_ISR(void) __interrupt 1;
+unsigned char random(void);
+void Red(void);
+void Green(void);
+void Biled_Off(void);
+void LED0_On(void);
+void LED0_Off(void);
+void LED1_On(void);
+void LED1_Off(void);
+void Both_On(void);
+void Both_Off(void);
+void Check(unsigned char);
+
+
+//-----------------------------------------------------------------------------
+// Global Variables
+//-----------------------------------------------------------------------------
+__sbit __at 0xB3 BILED0;
+__sbit __at 0xB4 BILED1;
+__sbit __at 0xB0 PB0;
+__sbit __at 0xB1 PB1;
+__sbit __at 0xB5 LED0;
+__sbit __at 0xB6 LED1;
+__sbit __at 0xB7 Buzzer;
+__sbit __at 0xA0 SS;    // Slide Switch associated with Port 2 Pin 0
+
+// sbit settings are incomplete, include those developed 
+// in Lab 1-1 and add the sbit setting for LED1
+unsigned int Counts = 0;
+unsigned int correct = 0;
+unsigned int pressed = 0;
+unsigned char i, num, prev;
+
+//***************
+void main(void)
+{
+    Sys_Init();      // System Initialization
+    Port_Init();     // Initialize ports 2 and 3 
+    Interrupt_Init();
+    Timer_Init();    // Initialize Timer 0 
+
+    putchar(' ');    // the quote fonts may not copy correctly into SiLabs IDE
+    printf("Start\r\n");
+	
+
+    while(1) {
+		if (SS) {
+			LED0_Off();
+			LED1_Off();
+			Biled_Off();
+			Buzzer = 1;
+			TR0 = 0;
+			continue;
+		} else if(!SS) {
+			correct = 0;
+			printf("Game begins!\r\n");
+			for (i = 0; i < 10; ++i) {
+				while(SS);
+				TR0 = 1;
+				Buzzer = 1;
+				num = random();
+
+				while (num == prev) {
+					num = random();
+				}
+				prev = num;
+				Check(num);
+			}	
+			printf("Game is finished\r\n");
+			printf("Number correct: %d\r\n", correct);
+			
+		}
+		printf("Reset game to play again\r\n");
+		while(!SS);
+	}
+}
+
+//***************
+void Port_Init(void)
+{
+	// use Port configuration from Lab 1-1
+    // adding the output bit for LED1
+    
+	P3MDOUT &= ~0x03;
+	P3MDOUT |= 0xF8;
+	P3 |= 0x03;
+
+	P2MDOUT &= ~0x01;
+	P2 |= 0x01;
+}
+
+void Interrupt_Init(void)
+{
+    IE |= 0x02;      // enable Timer0 Interrupt request (by masking)
+    EA = 1;       // enable global interrupts (by sbit)
+}
+//***************
+void Timer_Init(void)
+{
+
+    CKCON |= 0x08;  // Timer0 uses SYSCLK as source
+    TMOD &= ~0x0F;   // clear the 4 least significant bits
+	TMOD |= 0x01;   // Timer0 in mode 1
+    TR0 = 0;           // Stop Timer0
+    TMR0 = 0;           // Clear high & low byte of T0
+
+}
+
+
+//***************
+void Timer0_ISR(void) __interrupt 1
+{
+// add interrupt code here, in this lab, the code will increment the 
+// global variable 'counts'
+	Counts++;
+}
+
+/******************************************************************************/
+/*
+  This function demonstrates how to obtain a random integer between 0 and 1 in
+  C. You may modify and use this code to get a random integer between 0 and N.
+*/
+
+/*return a random integer number between 0 and 1*/
+unsigned char random(void)
+{
+    return (rand()%3);  // rand returns a random number between 0 and 32767.
+                        // the mod operation (%) returns the remainder of 
+                        // dividing this value by 2 and returns the result,
+                        // a value of either 0, 1, or 2.
+}
+
+void Check(unsigned char num) {
+	pressed = 0;
+	Biled_Off();
+	if (num == 0) {
+		LED0_On();
+		Counts = 0;
+		while (Counts < 337) {
+			if (!PB0 && PB1) {  // WHEN CORRECT
+				pressed++;
+				Green();
+			} else if ((!PB0 && !PB1) || (PB0 && !PB1) || (PB0 && PB1)) { // WHEN INCORRECT (BOTH NOT PRESSED, OTHER BUTTON PRESSED
+				Red();												      // BOTH BUTTONS PRESSED)
+			}
+		}
+		if (pressed > 0) {
+			correct++;
+		}
+		Biled_Off();
+		LED0_Off();
+	} else if (num == 1) {
+		LED1_On();
+		Counts = 0;
+		while(Counts < 337) {
+			if (PB0 && !PB1) {
+				pressed++;
+				Green();
+			} else if ((!PB0 && !PB1) || (!PB0 && PB1) || (PB0 && PB1)) { // WHEN INCORRECT (BOTH NOT PRESSED, OTHER BUTTON PRESSED
+				Red();                                                    // BOTH BUTTONS PRESSED)
+			}
+		}
+		if (pressed > 0) {
+			correct++;
+		}
+		Biled_Off();
+		LED1_Off();
+	} else if (num == 2) {
+		Both_On();
+		Counts = 0;
+		while (Counts < 337) {
+			if (!PB0 && !PB1) {
+				pressed++;
+				Green();
+			} else if ((PB0 && PB1) || (!PB0 && PB1) || (PB0 && !PB1)) { // WHEN INCORRECT (BOTH NOT PRESSED, ONE BUTTON PRESSED)
+				Red();                                                     
+			}
+		}
+		if (pressed > 0) {
+			correct++;
+		}
+		Biled_Off();
+		Both_Off();
+	}
+}
+
+
+void Red(void) {
+	BILED0 = 0;
+	BILED1 = 1;
+}
+
+void Green(void) {
+	BILED0 = 1;
+	BILED1 = 0;
+}
+
+void Biled_Off(void) {
+	BILED0 = 0;
+	BILED1 = 0;
+}
+
+void LED0_On(void) {
+	LED0 = 0;
+}
+
+void LED0_Off(void) {
+	LED0 = 1;
+}
+
+void LED1_On(void) {
+	LED1 = 0;
+}
+
+void LED1_Off(void) {
+	LED1 = 1;
+}
+
+void Both_On(void) {
+	LED0 = 0;
+	LED1 = 0;
+}
+
+void Both_Off(void) {
+	LED0 = 1;
+	LED1 = 1;
+}

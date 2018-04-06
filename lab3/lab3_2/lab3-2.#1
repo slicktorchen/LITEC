@@ -1,0 +1,155 @@
+/*Lab 3_2 code 
+  Victor Chen
+  Section 4 A
+*/
+#include <c8051_SDCC.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <i2c.h>
+#define PW_CENTER 2767
+#define PW_MIN 2029
+#define PW_MAX 3505
+//-----------------------------------------------------------------------------
+// Function Prototypes
+//-----------------------------------------------------------------------------
+void PCA_Init (void);
+void XBR0_Init();
+void SMB_Init(void);
+void PCA_ISR ( void ) __interrupt 9;
+unsigned int ReadRanger(void);
+unsigned int ReadCompass(void);
+
+//-----------------------------------------------------------------------------
+// Global Variables
+//-----------------------------------------------------------------------------
+
+unsigned int PW = 0;
+unsigned int r_count = 0, h_count = 0, counts = 0;
+unsigned char addr, start_reg, num_bytes, new_range, range,new_heading, heading;
+
+unsigned char* Data;
+char input;
+
+
+//-----------------------------------------------------------------------------
+// Main Function
+//-----------------------------------------------------------------------------
+void main(void)
+{
+    // initialize board
+    Sys_Init();
+    putchar(' '); //the quotes in this line may not format correctly
+    XBR0_Init();
+    PCA_Init();
+	SMB_Init();
+    //print beginning message
+    printf("Embedded Control Stuff\n\r");
+
+    while(1) {
+        if(new_range) {
+			range = ReadRanger();
+			Data[0] = 0x51; // write 0x51 to reg 0 of the ranger:
+			i2c_write_data(0xE0, 0, Data, 1); // write one byte of data to reg 0 at addr
+			new_range = 0;
+			//printf("Ranger: %d\n\r",range);
+		}
+		if (new_heading) {
+			heading = ReadCompass();
+			printf("Compass: %d\n\r", heading);//*(3599/2550));
+			new_heading = 0;
+		}
+	}
+}
+
+
+//-----------------------------------------------------------------------------
+// XBR0_Init
+//-----------------------------------------------------------------------------
+//
+// Set up the crossbar
+//
+void XBR0_Init()
+{
+    XBR0 = 0x27;  //configure crossbar for CEX0, CEX1, CEX2, SDA, SCL
+
+}
+//-----------------------------------------------------------------------------
+// PCA_Init
+//-----------------------------------------------------------------------------
+//
+// Set up Programmable Counter Array
+//
+void PCA_Init(void)
+{
+	PCA0MD = 0x81;    // SYSCLK/12, enable CF interrupts
+    PCA0CPM0 = 0xC2;  // 16 bit, enable compare, enable PWM
+	PCA0CN |= 0x40;   // enable PCA counter
+	EIE1 |= 0x08;     // enable PCA interrupt
+	EA = 1;           // enable global interrupts
+}
+
+//-------------------------------------------------------------------------------
+// SMB_Init
+//-------------------------------------------------------------------------------
+//
+// Set up SMBus
+//
+void SMB_Init(void) {
+	SMB0CR = 0x93;
+	ENSMB = 1;
+}
+
+//-----------------------------------------------------------------------------
+// PCA_ISR
+//-----------------------------------------------------------------------------
+//
+// Interrupt Service Routine for Programmable Counter Array Overflow Interrupt
+//
+void PCA_ISR ( void ) __interrupt 9
+{
+	if (CF) {
+		PCA0 = 0x7000;
+		r_count++;// start count
+        if (r_count >= 10) {
+            new_range = 1;
+            r_count = 0;
+		}
+		h_count++;
+		if (h_count >= 10) {
+			new_heading = 1;
+			h_count = 0;
+		}
+		CF = 0;                      // clear interrupt flag
+	} else {
+		PCA0CN &= 0xC0;              // all other interrupt types
+	}
+}
+
+//------------------------------------------------------------
+// Reads Ranger output
+//------------------------------------------------------------
+unsigned int ReadRanger(void)
+{
+	unsigned char Data[2];
+	unsigned int range =0;
+	unsigned char addr=0xE0; // the address of the ranger is 0xE0
+	i2c_read_data(addr, 2, Data, 2); // read two bytes, starting at reg 2
+	range = (((unsigned int)Data[0] << 8) | Data[1]);
+	return range;
+}
+
+//------------------------------------------------------------
+// Reads Compass output
+//------------------------------------------------------------
+unsigned int ReadCompass(void)
+{
+	unsigned char addr = 0xC0; 							// the address of the sensor, 0xC0 for the compass
+	unsigned char Data[2]; 								// Data is an array with a length of 2
+	unsigned int heading; 								// the heading returned in degrees between 0 and 3599
+	i2c_read_data(addr, 2, Data, 2); 				// read two byte, starting at reg 2
+	heading =(((unsigned int)Data[0] << 8) | Data[1]);	// combine the two values
+														// heading has units of 1/10 of a degree
+	return heading;										// the heading returned in degrees between 0 and 3599
+}
+
+
